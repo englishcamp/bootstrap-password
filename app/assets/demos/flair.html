@@ -30,7 +30,8 @@
             color: white;
         }
 
-        #myform input[type="password"], #myform input[type="text"] {
+        #myform input[type="password"],
+        #myform input[type="text"] {
             background: transparent;
             border: 2px solid #46AC84;
             color: #777;
@@ -54,7 +55,8 @@
             width: 100%;
         }
 
-        #myform input[type="password"]:focus, #myform input[type="text"]:focus {
+        #myform input[type="password"]:focus,
+        #myform input[type="text"]:focus {
             outline: 0;
         }
 
@@ -135,10 +137,25 @@
 </head>
 
 <body>
-<h1>bootstrap-password<small>styled</small></h1>
-<form id="myform" action="" method="get" accept-charset="utf-8">
-    <input id="myPassword" type="password" name="" value="">
-</form>
+
+<div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+            <h1>Basic</h1>
+            <form id="myform">
+                <div class="form-group">
+                    <label for="myPassword">Password</label>
+                    <input type="password" class="form-control" id="myPassword" placeholder="Password">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--<form id="myform" action="" method="get" accept-charset="utf-8">-->
+    <!--<input id="myPassword" type="password" name="" value="">-->
+<!--</form>-->
 
 <script>
     $(document).ready(function($) {

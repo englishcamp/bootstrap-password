@@ -35,7 +35,7 @@ exports.config =
         'css/bootstrap-password.css': /^app/
       order:
         before: [
-          'bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap.scss'
+          'bower_components/bootstrap-sass-official/assets/stylesheets/_bootstrap.scss'
         ]
 
 #	    templates:
@@ -68,3 +68,8 @@ exports.config =
   conventions:
     # defaults here: https://github.com/brunch/brunch/blob/stable/src/helpers.coffee#L227
     assets: /^app[\/\\]+assets[\/\\]+/ # works
+    ignored: [
+      #      /[\\/]_/
+      /[\\/]_(?!bootstrap.scss)/
+      /vendor[\\/](node|j?ruby-.*|bundle)[\\/]/
+    ]
