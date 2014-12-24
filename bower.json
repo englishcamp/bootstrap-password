@@ -1,0 +1,33 @@
+{
+	"name": "bootstrap-password",
+	"version": "0.0.1",
+	"main": [
+		"public/js/bootstrap-password.js",
+		"public/css/bootstrap-password.css"
+	],
+	"main-comments":
+		"optional scss files are in public/scss",
+	"ignore": [
+		"**/.*",
+		"node_modules",
+		"bower_components"
+	],
+	"dependencies": {
+		"jquery": ">=1.10.2",
+		"jquery-ui": ">=1.10.3",
+		"jquery-simulate": "*",
+		"bootstrap-sass-official": ">=3.1.1"
+	},
+	"devDependencies": {
+		"jasmine-jquery": ">=2.0.3",
+		"jasmine-fixture": ">=1.2.0"
+	},
+	"overrides": {
+		"jquery-simulate": {
+			"main": "jquery.simulate.js",
+			"dependencies": {
+				"jquery": "*"
+			}
+		},
+	}
+}

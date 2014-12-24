@@ -1,107 +1,39 @@
-Strength.js
+bootstrap-password
 ===========
+jQuery password input plugin for bootstrap with a strength indicator and hide/show password.
 
-The ultimate jQuery password input plugin. Featuring secure strength indicator and hide/show password
+WORK IN PROGRESS
 
-### Documentation
+# Why
+I needed something configurable, usable with bootstrap, and preferably coffeescript and driven by scss variables/mixins etc.
 
-Strength.js provides a toggle feature for password input fields that allows the user to view or asterisk the password. It also features a strength indicator to show how secure a users password is.
-
-#### ..:: Demo
-For a demo visit http://git.aaronlumsden.com/strength.js/
+# Usage
+TODO
 
 
-The password secuirty indicator is marked on 4 scores. These are
+# Development
 
-*   Password must contain 8 characters or more
-*   Password must contain 1 lowercase letter
-*   Password must contain 1 uppercase letter
-*   Password must contain 1 number
+## Stack
+This project is authored in coffescript and scss.
 
-#### ..:: Getting Started
+### Brunch
+[Brunch](http://brunch.io) is a html5 application builder that's agnostic to programming langs and frameworks.
 
-##### Include the relevant files
+`brunch-config.coffee` contains brunch configuration, `package.json` contains brunch plugins.
 
-Firstly include jQuery and the strength.css and strength.js files. Place these before `&lt;/head&gt;` section
+### Bower
+It is accessible via the bower package manager.
 
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<script type="text/javascript" src="strength.js"></script>
-	<script type="text/javascript" src="js.js"></script>
-					
 
-##### Create a password input field
+## Contributing
 
-You must give your password input a unique ID.
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
 
-	<input id="myPassword" type="password" name="" value="">
 
-##### Initiate the plugin
+## Copyright
 
-Once you have created your password input field you will need to initiate the plugin.
-
-At its most basic level you can initiate the plugin like:
-
-						
-	$(document).ready(function ($) {
-
-        $("#myPassword").strength();
-
-    });
-					
-
-If you want to initiate the plugin with options then you can do so like:
-
-								
-	$('#myPassword').strength({
-            strengthClass: 'strength',
-            strengthMeterClass: 'strength_meter',
-            strengthButtonClass: 'button_strength',
-            strengthButtonText: 'Show password',
-            strengthButtonTextToggle: 'Hide Password'
-        });		
-
-#### ..:: Options
-
-<table>
-							<thead>
-								<tr>
-									<th>Variable</th>
-									<th>Default Value</th>
-									<th>Description</th>
-									<th>Valid Options</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>strengthClass</td>
-									<td>strength</td>
-									<td>The CSS class that you want your input field to have</td>
-									<td></td>
-								</tr>
-								<tr>
-									<td>strengthMeterClass</td>
-									<td>strength_meter</td>
-									<td>The CSS class that you want your input field to have</td>
-									<td></td>
-								</tr>
-								<tr>
-									<td>strengthButtonClass</td>
-									<td>button_strength</td>
-									<td>The CSS class that you want the toggle button to have</td>
-									<td></td>
-								</tr>
-								<tr>
-									<td>strengthButtonText</td>
-									<td>Show Password</td>
-									<td>The text that you want to show for the toggle button</td>
-									<td></td>
-								</tr>
-								<tr>
-									<td>strengthButtonTextToggle</td>
-									<td>Hide Password</td>
-									<td>The toggled text that you want to show for the toggle button</td>
-									<td></td>
-								</tr>
-
-							</tbody>
-						</table>
+Copyright (c) 2014 AlienFast, LLC and others. See LICENSE.txt for further details.
