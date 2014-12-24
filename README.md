@@ -10,6 +10,10 @@ I needed something configurable, usable with bootstrap, and preferably coffeescr
 # Usage
 TODO
 
+## Distribution files
+All distributions are in the `public` directory.  Necessary files are:
+* `js/bootstrap-password.js` (or `.min`)
+* `css/bootstrap-password.css` (or the `scss` files)
 
 # Development
 

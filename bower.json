@@ -7,6 +7,13 @@
 	],
 	"main-comments":
 		"optional scss files are in public/scss",
+	"keywords": [
+	  "bootstrap",
+	  "password",
+	  "sass"
+	],
+	"license": "MIT",
+
 	"ignore": [
 		"**/.*",
 		"node_modules",
