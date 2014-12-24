@@ -1,0 +1,44 @@
+{
+	"author": "Kevin Ross",
+	"name": "bootstrap-password",
+	"description": "AlienFast bootstrap-password",
+	"version": "0.0.1",
+	"homepage": "https://github.com/alienfast/bootstrap-password",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/alienfast/bootstrap-password.git"
+	},
+	"scripts": {
+		"test": "cake build:test",
+		"start": "brunch watch --server"
+	},
+	"dependencies": {
+		"jquery": ">=1.10.2",
+		"jquery-simulate": "jquery/jquery-simulate.git"
+	},
+	"devDependencies": {
+		"rimraf": "*",
+	  	"mkdirp": "*",
+	  	"glob": "*",
+		"path": "*",
+
+
+		"clean-css-brunch": ">= 1.0",
+		"coffee-script": ">=1.7.1",
+		"coffee-script-brunch": ">= 1.0",
+		"coffeelint-brunch": ">= 1.0",
+		"css-brunch": ">= 1.0",
+		"sass-brunch": ">= 0.1",
+		"javascript-brunch": ">= 1.0",
+
+		"karma": ">=0.12.1",
+		"karma-jasmine": ">=0.2.2",
+
+		"karma-chrome-launcher": "^0.1.3",
+		"karma-coffee-preprocessor": "^0.2.1",
+		"karma-firefox-launcher": "^0.1.3",
+		"karma-phantomjs-launcher": "^0.1.3",
+		"karma-requirejs": "^0.2.1",
+		"karma-safari-launcher": "^0.1.1"
+	}
+}

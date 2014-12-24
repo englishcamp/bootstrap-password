@@ -9,6 +9,7 @@ path = require 'path'
 {spawn, exec} = require 'child_process'
 glob = require("glob") # https://github.com/isaacs/node-glob
 rmrf = (require 'rimraf').sync
+mkdirp = require 'mkdirp'
 
 try
   which = require('which').sync
@@ -76,7 +77,8 @@ copyFile = (sourceFile, destFile) ->
 
 copyAll = (config) ->
   rmrf(config.dest)
-  fs.mkdirSync(config.dest, 0o0755)
+#  fs.mkdirSync(config.dest, 0o0755)
+  mkdirp(config.dest)
 
   glob("#{config.src}", null, (err, matches) ->
 
@@ -106,7 +108,7 @@ task 'build:assets-bootstrap-fonts', 'copy the bootstrap fonts in the expected p
   log "Running build:assets-bootstrap-fonts...", green
 
   config =
-    src: 'bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/*',
+    src: 'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*',
     dest: 'public/css/bootstrap'
 
   copyAll(config)

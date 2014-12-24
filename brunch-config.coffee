@@ -21,7 +21,7 @@ exports.config =
 #            return true if path.match(/^(bower_components|vendor)/)
 #            return false
 
-#          if path.indexOf('bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/') != -1
+#          if path.indexOf('bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/') != -1
 #            return false
 #          else
 #            return true if path.match(/^(bower_components|vendor)/)
@@ -42,18 +42,18 @@ exports.config =
         before: [
           'bower_components/jquery/dist/jquery.js'
           'bower_components/jquery-ui/ui/jquery-ui.js'
-          'bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/affix.js'
-          'bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/alert.js'
-          'bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/button.js'
-          'bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/carousel.js'
-          'bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/collapse.js'
-          'bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/dropdown.js'
-          'bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/tab.js'
-          'bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/transition.js'
-          'bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/scrollspy.js'
-          'bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/modal.js'
-          'bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/tooltip.js'
-          'bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/popover.js'
+          'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js'
+          'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/alert.js'
+          'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/button.js'
+          'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/carousel.js'
+          'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js'
+          'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/dropdown.js'
+          'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js'
+          'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js'
+          'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/scrollspy.js'
+          'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js'
+          'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js'
+          'bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/popover.js'
         ]
 
     stylesheets:
@@ -62,7 +62,7 @@ exports.config =
         'css/bootstrap-password.css': /^app/
       order:
         before: [
-          'bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss'
+          'bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap.scss'
         ]
 
 #	    templates:
