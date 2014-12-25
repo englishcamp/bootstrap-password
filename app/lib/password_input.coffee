@@ -72,20 +72,41 @@ class PasswordInput
     newValue = @element.val()
     if @options.showHide is true
       @hiddenInputElement.val(newValue)
-    @updateStrength newValue
 
-  # check the password against the tests
-  updateStrength: (newValue) =>
+    strength = @calculateStrength(newValue)
+    @updateUI strength
+
+  updateUI: (strength) =>
     meterElement = $("div[data-meter='#{@id}']")
+    meterElement.removeClass().addClass(strength)
+
+    switch strength
+      when 'strong' then meterElement.text @options.strongText
+      when 'medium' then meterElement.text @options.mediumText
+      when 'weak' then meterElement.text @options.weakText
+      when 'strength'then meterElement.text 'strength'
+      else
+        meterElement.text @options.veryWeakText
+
+  calculateStrength: (newValue) =>
+    #
+    # Check the password against the calculation. Allow someone to pass in a different `calculation` fn via options.
+    #   Any given function should return strength string values of strength|veryweak|weak|strong
+    #
+    calculation = @options.calculation or @defaultCalculation
+    calculation(newValue)
+
+  defaultCalculation: (newValue) =>
+    # check the password against the regexes given in the options (defaulted as well)
     if newValue.length is 0
-      meterElement.removeClass().text 'strength'
+      'strength'
     else if newValue.search(@options.strongTest) >= 0
-      meterElement.removeClass().addClass('strong').text @options.strongText
+      'strong'
     else if newValue.search(@options.mediumTest) >= 0
-      meterElement.removeClass().addClass('medium').text @options.mediumText
+      'medium'
     else if newValue.search(@options.weakTest) >= 0
-      meterElement.removeClass().addClass('weak').text @options.weakText
+      'weak'
     else
-      meterElement.removeClass().addClass('veryweak').text @options.veryWeakText
+      'veryweak'
 
 module.exports = PasswordInput
