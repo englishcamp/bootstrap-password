@@ -7,21 +7,33 @@ PasswordInput = require 'lib/password_input'
 $.fn.extend
 
   _defaultOptions:
+
+    lang: 'en'
+    allowShow: true
+
+
     strengthClass: 'strength'
     strengthMeterClass: 'strength_meter'
-    veryWeakText: 'very weak'
-    weakTest: /^[a-zA-Z0-9]{6,}$/
-    weakText: 'weak'
-    mediumTest: /^(?=.*\d)(?=.*[a-z])(?!.*\s).{8,}$|^(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,}$/
-    mediumText: 'medium'
-    strongTest: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,}$/
-    strongText: 'strong'
+
+    en:
+      meter:
+        veryWeak: 'very weak'
+        weak: 'weak'
+        medium: 'medium'
+        strong: 'strong'
+        none: 'strength'
+      show: 'Show Password'
+      hide: 'Hide Password'
+
     wrapper: false
     wrapperClass: 'strength_wrapper'
-    showHide: true
     showHideButtonClass: 'button_showhide'
-    showHideButtonText: 'Show Password'
-    showHideButtonTextToggle: 'Hide Password'
+
+    # calculation can be a function, or users can override the test regexes below
+    calculation:
+      weakTest: /^[a-zA-Z0-9]{6,}$/
+      mediumTest: /^(?=.*\d)(?=.*[a-z])(?!.*\s).{8,}$|^(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,}$/
+      strongTest: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,}$/
 
   bootstrap_password: (options) ->
 

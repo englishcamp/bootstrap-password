@@ -4,6 +4,7 @@ class PasswordInput
     @element = $(element)
     @id = @element.attr('id')
     @isShown = false
+    @i18n = @options[@options.lang]
 
     # prep password field
     @element.addClass(@options.strengthClass).attr 'data-password', @id
@@ -40,8 +41,8 @@ class PasswordInput
     """
 
     # create 'show/hide' toggle and 'text' version of password field
-    if @options.showHide is true
-      @showHideElement = $("<a data-password-button='#{@id}' href='' class='#{@options.showHideButtonClass}'>#{@options.showHideButtonText}</a>")
+    if @options.allowShow is true
+      @showHideElement = $("<a data-password-button='#{@id}' href='' class='#{@options.showHideButtonClass}'>#{@i18n.show}</a>")
       @element.after @showHideElement
 
       # events to trigger show/hide for password field
@@ -54,13 +55,13 @@ class PasswordInput
     hideClass = "hide_#{@options.showHideButtonClass}"
     if @isShown
       @element.attr('type', 'password')
-      if @options.showHide is true
-        @showHideElement.removeClass(hideClass).html @options.showHideButtonText
+      if @options.allowShow is true
+        @showHideElement.removeClass(hideClass).html @i18n.show
       @isShown = false
     else
       @element.attr('type', 'text')
-      if @options.showHide is true
-        @showHideElement.addClass(hideClass).html @options.showHideButtonTextToggle
+      if @options.allowShow is true
+        @showHideElement.addClass(hideClass).html @i18n.hide
       @isShown = true
 
   onKeyup: (ev) =>
@@ -73,32 +74,34 @@ class PasswordInput
     meterElement.removeClass().addClass(strength)
 
     switch strength
-      when 'strong' then meterElement.text @options.strongText
-      when 'medium' then meterElement.text @options.mediumText
-      when 'weak' then meterElement.text @options.weakText
-      when 'strength'then meterElement.text 'strength'
+      when 'strong', 'medium', 'weak', 'none'
+        meterElement.text(@i18n.meter[strength])
       else
-        meterElement.text @options.veryWeakText
+        meterElement.text @i18n.meter.veryWeak
 
   calculateStrength: (newValue) =>
     #
     # Check the password against the calculation. Allow someone to pass in a different `calculation` fn via options.
     #   Any given function should return strength string values of strength|veryweak|weak|strong
     #
-    calculation = @options.calculation or @defaultCalculation
+    if typeof @options.calculation is 'function'
+      calculation = @options.calculation
+    else
+      calculation = @defaultCalculation
+
     calculation(newValue)
 
   defaultCalculation: (newValue) =>
     # check the password against the regexes given in the options (defaulted as well)
     if newValue.length is 0
-      'strength'
-    else if newValue.search(@options.strongTest) >= 0
+      'none'
+    else if newValue.search(@options.calculation.strongTest) >= 0
       'strong'
-    else if newValue.search(@options.mediumTest) >= 0
+    else if newValue.search(@options.calculation.mediumTest) >= 0
       'medium'
-    else if newValue.search(@options.weakTest) >= 0
+    else if newValue.search(@options.calculation.weakTest) >= 0
       'weak'
     else
-      'veryweak'
+      'veryWeak'
 
 module.exports = PasswordInput
