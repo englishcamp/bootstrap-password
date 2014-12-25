@@ -41,9 +41,7 @@ class PasswordInput
 
     # create 'show/hide' toggle and 'text' version of password field
     if @options.showHide is true
-      @hiddenInputElement = $("<input type='text' data-password='#{@id}' name='#{@element.attr('name')}' class='hidden #{@element.attr('class') + @options.strengthClass}' placeholder='#{@element.attr('placeholder')}' value='' disabled='disabled'>")
       @showHideElement = $("<a data-password-button='#{@id}' href='' class='#{@options.showHideButtonClass}'>#{@options.showHideButtonText}</a>")
-      @element.after @hiddenInputElement
       @element.after @showHideElement
 
       # events to trigger show/hide for password field
@@ -55,25 +53,19 @@ class PasswordInput
 
     hideClass = "hide_#{@options.showHideButtonClass}"
     if @isShown
-      @element.prop('disabled', false).show().focus()
+      @element.attr('type', 'password')
       if @options.showHide is true
-        @hiddenInputElement.prop('disabled', true).hide()
         @showHideElement.removeClass(hideClass).html @options.showHideButtonText
       @isShown = false
     else
-      @element.prop('disabled', true).hide()
+      @element.attr('type', 'text')
       if @options.showHide is true
-        @hiddenInputElement.prop('disabled', false).show().focus()
         @showHideElement.addClass(hideClass).html @options.showHideButtonTextToggle
       @isShown = true
 
   onKeyup: (ev) =>
     # events to trigger strength meter and update the hidden field
-    newValue = @element.val()
-    if @options.showHide is true
-      @hiddenInputElement.val(newValue)
-
-    strength = @calculateStrength(newValue)
+    strength = @calculateStrength(@element.val())
     @updateUI strength
 
   updateUI: (strength) =>
