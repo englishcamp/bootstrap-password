@@ -10,24 +10,21 @@ $.fn.extend
 
     lang: 'en'
     allowShow: true
-
-
-    strengthClass: 'strength'
-    strengthMeterClass: 'strength_meter'
+    meterClass: 'meter'
 
     en:
       meter:
-        veryWeak: 'very weak'
-        weak: 'weak'
-        medium: 'medium'
-        strong: 'strong'
-        none: 'strength'
+        veryWeak: 'Very Weak'
+        weak: 'Weak'
+        medium: 'Medium'
+        strong: 'Strong'
+        none: 'Strength'
       show: 'Show Password'
       hide: 'Hide Password'
 
     wrapper: false
     wrapperClass: 'strength_wrapper'
-    showHideButtonClass: 'button_showhide'
+    toggleVisibilityClass: 'toggle-visibility'
 
     # calculation can be a function, or users can override the test regexes below
     calculation:

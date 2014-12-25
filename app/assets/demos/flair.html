@@ -67,7 +67,7 @@
             margin-bottom: 60px;
         }
 
-        .strength_meter {
+        .meter {
             position: absolute;
             left: 0px;
             top: 0px;
@@ -84,7 +84,7 @@
             font-size: 13px;
         }
 
-        .strength_meter div {
+        .meter div {
             width: 0%;
             height: 43px;
             text-align: right;
@@ -99,7 +99,7 @@
             border-radius: 5px;
         }
 
-        .strength_meter div p {
+        .meter div p {
             position: absolute;
             top: 22px;
             right: 0px;
@@ -160,14 +160,7 @@
 <script>
     $(document).ready(function($) {
 
-        $('#myPassword').strength({
-            strengthClass: 'strength',
-            strengthMeterClass: 'strength_meter',
-            strengthButtonClass: 'button_strength',
-            strengthButtonText: 'Show Password',
-            strengthButtonTextToggle: 'Hide Password'
-        });
-
+        $('#myPassword').bootstrap_password();
     });
 </script>
 </body>

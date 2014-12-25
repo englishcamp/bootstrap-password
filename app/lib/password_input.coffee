@@ -2,12 +2,13 @@ class PasswordInput
 
   constructor: (element, @options) ->
     @element = $(element)
+    @formGroup = @element.parents('.form-group')
+
     @id = @element.attr('id')
     @isShown = false
     @i18n = @options[@options.lang]
 
-    # prep password field
-    @element.addClass(@options.strengthClass).attr 'data-password', @id
+    # hookup detection
     @element.keyup(@onKeyup)
 
     # create wrapper if requested
@@ -33,16 +34,18 @@ class PasswordInput
 
       @element.wrap $('<div />').addClass(@options.wrapperClass).css(wrapperCSS)
 
-    # create strength meter
-    @element.after """
-      <div class='#{@options.strengthMeterClass}'>
-        <div data-meter='#{@id}'>Strength</div>
-      </div>
-    """
+    # create strength meter outer div and inner label.  Looks like:
+    #    <div class="meter">
+    #      <div class="none">Strength</div>
+    #    </div>
+    @meterElement = $("<div class='#{@options.meterClass}'>")
+    @meterLabelElement = $("<div>#{@i18n.meter.none}</div>")
+    @meterLabelElement.appendTo @meterElement
+    @element.after @meterElement
 
     # create 'show/hide' toggle and 'text' version of password field
     if @options.allowShow is true
-      @showHideElement = $("<a data-password-button='#{@id}' href='' class='#{@options.showHideButtonClass}'>#{@i18n.show}</a>")
+      @showHideElement = $("<a href='#' class='#{@options.toggleVisibilityClass}'>#{@i18n.show}</a>")
       @element.after @showHideElement
 
       # events to trigger show/hide for password field
@@ -52,7 +55,7 @@ class PasswordInput
   onShowHideClick: (ev) =>
     ev.preventDefault()
 
-    hideClass = "hide_#{@options.showHideButtonClass}"
+    hideClass = "hide-#{@options.toggleVisibilityClass}"
     if @isShown
       @element.attr('type', 'password')
       if @options.allowShow is true
@@ -70,14 +73,13 @@ class PasswordInput
     @updateUI strength
 
   updateUI: (strength) =>
-    meterElement = $("div[data-meter='#{@id}']")
-    meterElement.removeClass().addClass(strength)
+    @meterLabelElement.removeClass().addClass(strength)
 
     switch strength
       when 'strong', 'medium', 'weak', 'none'
-        meterElement.text(@i18n.meter[strength])
+        @meterLabelElement.text(@i18n.meter[strength])
       else
-        meterElement.text @i18n.meter.veryWeak
+        @meterLabelElement.text @i18n.meter.veryWeak
 
   calculateStrength: (newValue) =>
     #

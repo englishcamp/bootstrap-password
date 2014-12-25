@@ -22,12 +22,12 @@
 
     <!-- customized assets-->
     <style type="text/css">
-        .strength_meter {
+        .meter {
             height: 23px;
             width: 154px;
         }
 
-        .strength_meter div {
+        .meter div {
             height: 23px;
             width: 100%;
             height: 23px;
@@ -65,13 +65,7 @@
 
     require('bootstrap-password');
     $(document).ready(function($) {
-        $('#myPassword').bootstrap_password({
-            strengthClass: 'strength',
-            strengthMeterClass: 'strength_meter',
-            strengthButtonClass: 'button_strength',
-            strengthButtonText: 'Show Password',
-            strengthButtonTextToggle: 'Hide Password'
-        });
+        $('#myPassword').bootstrap_password();
     });
 </script>
 </body>
