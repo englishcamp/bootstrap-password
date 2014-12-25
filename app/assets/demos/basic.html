@@ -62,8 +62,10 @@
 
 
 <script>
+
+    require('bootstrap-password');
     $(document).ready(function($) {
-        $('#myPassword').strength({
+        $('#myPassword').bootstrap_password({
             strengthClass: 'strength',
             strengthMeterClass: 'strength_meter',
             strengthButtonClass: 'button_strength',
