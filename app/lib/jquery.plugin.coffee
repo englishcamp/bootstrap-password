@@ -10,7 +10,10 @@ $.fn.extend
 
     lang: 'en'
     allowShow: true
+    meterGroup: false
+    meterGroupClass: 'meter-group'
     meterClass: 'meter'
+    toggleVisibilityClass: 'toggle-visibility'
 
     en:
       meter:
@@ -21,10 +24,6 @@ $.fn.extend
         none: 'Strength'
       show: 'Show Password'
       hide: 'Hide Password'
-
-    wrapper: false
-    wrapperClass: 'strength_wrapper'
-    toggleVisibilityClass: 'toggle-visibility'
 
     # calculation can be a function, or users can override the test regexes below
     calculation:

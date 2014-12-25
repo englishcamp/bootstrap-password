@@ -23,27 +23,20 @@
     <!-- customized assets-->
     <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
     <style type="text/css">
-        /*SITE STYLING*/
-        html {
-            background: #4EC094;
-            font-family: 'Lato', sans-serif;
-            color: white;
-        }
 
-        #myform input[type="password"],
-        #myform input[type="text"] {
+        #myPassword{
             background: transparent;
-            border: 2px solid #46AC84;
-            color: #777;
-            font-family: "Lato", sans-serif;
-            font-size: 14px;
+            /*border: 2px solid #46AC84;*/
+            /*color: #777;*/
+            /*font-family: "Lato", sans-serif;*/
+            /*font-size: 14px;*/
             padding: 9px 5px;
-            height: 21px;
+            /*height: 21px;*/
             text-indent: 6px;
             -webkit-appearance: none;
-            -webkit-border-radius: 6px;
-            -moz-border-radius: 6px;
-            border-radius: 6px;
+            /*-webkit-border-radius: 6px;*/
+            /*-moz-border-radius: 6px;*/
+            /*border-radius: 6px;*/
             -webkit-box-shadow: none;
             -moz-box-shadow: none;
             box-shadow: none;
@@ -55,16 +48,8 @@
             width: 100%;
         }
 
-        #myform input[type="password"]:focus,
-        #myform input[type="text"]:focus {
+        #myPassword:focus {
             outline: 0;
-        }
-
-        #myform {
-            width: 500px;
-            margin: 0 auto;
-            position: relative;
-            margin-bottom: 60px;
         }
 
         .meter {
@@ -72,62 +57,63 @@
             left: 0px;
             top: 0px;
             width: 100%;
-            height: 43px;
+            /*height: 43px;*/
             z-index: -1;
             border-radius: 5px;
-            padding-right: 13px;
+            /*padding-right: 13px;*/
         }
 
-        .button_strength {
+        .toggle-visibility {
             text-decoration: none;
-            color: #FFF;
-            font-size: 13px;
+            /*color: #FFF;*/
+            /*font-size: 13px;*/
         }
 
         .meter div {
             width: 0%;
-            height: 43px;
+            /*height: 43px;*/
             text-align: right;
-            color: #000;
-            line-height: 43px;
-            -webkit-transition: all .3s ease-in-out;
-            -moz-transition: all .3s ease-in-out;
-            -o-transition: all .3s ease-in-out;
-            -ms-transition: all .3s ease-in-out;
-            transition: all .3s ease-in-out;
+            /*color: #000;*/
+            /*line-height: 43px;*/
+            /*-webkit-transition: all .3s ease-in-out;*/
+            /*-moz-transition: all .3s ease-in-out;*/
+            /*-o-transition: all .3s ease-in-out;*/
+            /*-ms-transition: all .3s ease-in-out;*/
+            /*transition: all .3s ease-in-out;*/
+
             padding-right: 12px;
             border-radius: 5px;
         }
 
-        .meter div p {
-            position: absolute;
-            top: 22px;
-            right: 0px;
-            color: #FFF;
-            font-size: 13px;
-        }
+        /*.meter div p {*/
+            /*position: absolute;*/
+            /*top: 22px;*/
+            /*right: 0px;*/
+            /*color: #FFF;*/
+            /*font-size: 13px;*/
+        /*}*/
 
-        .veryweak {
-            background-color: #FFA0A0;
-            border-color: #F04040 !important;
+        .veryWeak {
+            /*background-color: #FFA0A0;*/
+            /*border-color: #F04040 !important;*/
             width: 25% !important;
         }
 
         .weak {
-            background-color: #FFB78C;
-            border-color: #FF853C !important;
+            /*background-color: #FFB78C;*/
+            /*border-color: #FF853C !important;*/
             width: 50% !important;
         }
 
         .medium {
-            background-color: #FFEC8B;
-            border-color: #FC0 !important;
+            /*background-color: #FFEC8B;*/
+            /*border-color: #FC0 !important;*/
             width: 75% !important;
         }
 
         .strong {
-            background-color: #C3FF88;
-            border-color: #8DFF1C !important;
+            /*background-color: #C3FF88;*/
+            /*border-color: #8DFF1C !important;*/
             width: 100% !important;
         }
 
@@ -158,9 +144,9 @@
 <!--</form>-->
 
 <script>
+    require('bootstrap-password');
     $(document).ready(function($) {
-
-        $('#myPassword').bootstrap_password();
+        $('#myPassword').bootstrap_password({meterGroup: true});
     });
 </script>
 </body>

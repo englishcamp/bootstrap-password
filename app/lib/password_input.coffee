@@ -12,11 +12,11 @@ class PasswordInput
     @element.keyup(@onKeyup)
 
     # create wrapper if requested
-    if @options.wrapper is true
+    if @options.meterGroup is true
 
       # does the input even need a wrapper? Does one already exist?
-      parent = @element.parent()
-      return  if (parent.css('position') is 'relative' or parent.css('position') is 'absolute') and parent.width() is @element.width() and parent.height() is @element.height()
+#      parent = @element.parent()
+#      return  if (parent.css('position') is 'relative' or parent.css('position') is 'absolute') and parent.width() is @element.width() and parent.height() is @element.height()
 
       # else create one
       wrapperCSS =
@@ -32,7 +32,7 @@ class PasswordInput
         fontSize: @element.css('fontSize')
         borderRadius: @element.css('borderRadius')
 
-      @element.wrap $('<div />').addClass(@options.wrapperClass).css(wrapperCSS)
+      @element.wrap $('<div />').addClass(@options.meterGroupClass).css(wrapperCSS)
 
     # create strength meter outer div and inner label.  Looks like:
     #    <div class="meter">
