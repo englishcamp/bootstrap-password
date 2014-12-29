@@ -34,7 +34,7 @@ $.fn.extend
   bootstrap_password: (options) ->
 
     # Merge default options with the provided options.
-    @options = $.extend {}, @_defaultOptions, options
+    @options = $.extend true, {}, @_defaultOptions, options
 
     # _Insert magic here._
     return @each ()=>

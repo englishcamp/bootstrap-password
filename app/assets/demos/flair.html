@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<!--original demo: http://codepen.io/pixelthing/pen/zqHEC -->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -72,7 +73,7 @@
         .meter div {
             width: 0%;
             /*height: 43px;*/
-            text-align: right;
+            /*text-align: right;*/
             /*color: #000;*/
             /*line-height: 43px;*/
             /*-webkit-transition: all .3s ease-in-out;*/
@@ -128,7 +129,7 @@
     <!-- Example row of columns -->
     <div class="row">
         <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
-            <h1>Basic</h1>
+            <h1>Flair</h1>
             <form id="myform">
                 <div class="form-group">
                     <label for="myPassword">Password</label>
@@ -146,7 +147,15 @@
 <script>
     require('bootstrap-password');
     $(document).ready(function($) {
-        $('#myPassword').bootstrap_password({meterGroup: true});
+        $('#myPassword').bootstrap_password(
+                {
+                    meterGroup: true,
+                    en: {
+                        show: 'show',
+                        hide: 'hide'
+                    }
+                }
+        );
     });
 </script>
 </body>
