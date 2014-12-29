@@ -109,7 +109,7 @@ task 'build:assets-bootstrap-fonts', 'copy the bootstrap fonts in the expected p
 
   config =
     src: 'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*',
-    dest: 'public/css/bootstrap'
+    dest: 'public/fonts/bootstrap'
 
   copyAll(config)
 
