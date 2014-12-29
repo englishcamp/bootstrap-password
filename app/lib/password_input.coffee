@@ -15,8 +15,8 @@ class PasswordInput
     if @options.meterGroup is true
 
       # does the input even need a wrapper? Does one already exist?
-#      parent = @element.parent()
-#      return  if (parent.css('position') is 'relative' or parent.css('position') is 'absolute') and parent.width() is @element.width() and parent.height() is @element.height()
+      #      parent = @element.parent()
+      #      return  if (parent.css('position') is 'relative' or parent.css('position') is 'absolute') and parent.width() is @element.width() and parent.height() is @element.height()
 
       # else create one
       wrapperCSS =
@@ -34,6 +34,7 @@ class PasswordInput
 
       @element.wrap $('<div />').addClass(@options.meterGroupClass).css(wrapperCSS)
 
+
     # create strength meter outer div and inner label.  Looks like:
     #    <div class="meter">
     #      <div class="none">Strength</div>
@@ -50,6 +51,14 @@ class PasswordInput
 
       # events to trigger show/hide for password field
       @showHideElement.click(@onShowHideClick)
+
+
+    # alter css dynamically as necessary to match the input's
+    if @options.meterGroup is true
+      meterLabelCss =
+        borderRadius: @element.css('borderRadius')
+      @meterLabelElement.css(meterLabelCss)
+
 
 
   onShowHideClick: (ev) =>
