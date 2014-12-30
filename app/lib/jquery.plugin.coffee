@@ -13,9 +13,8 @@ $.fn.extend
     backgroundMeter: false
     icons: false
 
-    backgroundMeterClass: 'background-meter'
-    meterClass: 'meter'
-    toggleVisibilityClass: 'toggle-visibility'
+    'input-group':
+      layout: false # || array of addons and input indicating order ['strength', 'input', ]
 
     en:
       meter:
@@ -33,7 +32,7 @@ $.fn.extend
       mediumTest: /^(?=.*\d)(?=.*[a-z])(?!.*\s).{8,}$|^(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,}$/
       strongTest: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,}$/
 
-  bootstrap_password: (options) ->
+  bootstrapPassword: (options) ->
 
     # Merge default options with the provided options.
     @options = $.extend true, {}, @_defaultOptions, options
@@ -41,4 +40,4 @@ $.fn.extend
     # _Insert magic here._
     return @each ()=>
       # A really lightweight plugin wrapper around the constructor, preventing against multiple instantiations
-      $.data(this, 'bootstrap_password', new PasswordInput(this, @options))  unless $.data(this, 'bootstrap_password')
+      $.data(this, 'bootstrapPassword', new PasswordInput(this, @options))  unless $.data(this, 'bootstrapPassword')

@@ -20,7 +20,7 @@ class PasswordInput
       beforeIcon =
         $("""
           <div class="input-group-addon">
-            <span class="glyphicon glyphicon-before-password" aria-hidden="true"></span>
+            <span class="icon-password-strength" aria-hidden="true"></span>
           </div>
           """)
       @element.before beforeIcon
@@ -32,24 +32,22 @@ class PasswordInput
         # icon-x temporary for icomoon until we convert
           $("""
             <div class="input-group-addon">
-              <a href='#' class='#{@options.toggleVisibilityClass}'>
-                <span class="glyphicon glyphicon-after-password" aria-hidden="true"></span>
-              </a>
+              <span class="toggle-visibility icon-toggle-visibility" aria-hidden="true"></span>
             </div>
             """)
 
         @element.after afterIcon
-        @toggleVisibilityIconElement = afterIcon.find(".#{@options.toggleVisibilityClass}")
+        @toggleVisibilityIconElement = afterIcon.find(".toggle-visibility")
         # events to trigger show/hide for password field
         @toggleVisibilityIconElement.click(@onToggleVisibility)
 
     if @options.backgroundMeter is true
 
-      @backgroundMeterElement = $("<div class='#{@options.backgroundMeterClass}' />")
+      @backgroundMeterElement = $("<div class='background-meter' />")
       @formGroupElement.append @backgroundMeterElement
 
       meterGroupElement = @backgroundMeterElement
-      @resetBackgroundMeterCss()
+
 
     # create strength meter outer div and inner label.  Looks like:
     #    <div class="meter">
@@ -59,43 +57,38 @@ class PasswordInput
       meterGroupElement = $("<div class='meter-group'/>")
       @element.after meterGroupElement
 
-    @meterElement = $("<div class='#{@options.meterClass}'>")
+    @meterElement = $("<div class='meter'>")
     @meterLabelElement = $("<div>#{@i18n.meter.none}</div>")
     @meterLabelElement.appendTo @meterElement
     meterGroupElement.append @meterElement
 
     # create 'show/hide' toggle and 'text' version of password field (not for the one with the background-meter)
     if @options.icons is false and @options.allowToggle is true
-      @toggleVisibilityTextElement = $("<a href='#' class='#{@options.toggleVisibilityClass}'>#{@i18n.show}</a>")
+      @toggleVisibilityTextElement = $("<a href='#' class='toggle-visibility'>#{@i18n.show}</a>")
       @formGroupElement.append @toggleVisibilityTextElement
 
       # events to trigger show/hide for password field
       @toggleVisibilityTextElement.click(@onToggleVisibility)
 
-    # trigger initial strength update
+    # trigger initial strength update and background-meter underlay placement
     @onKeyup()
+    @onResize()
 
-    $(window).resize @resetBackgroundMeterCss
+    $(window).resize @onResize
 
 
-  resetBackgroundMeterCss: =>
-    # now that position and everything is calculated, grab the css from the input and add it to our backgroundMeterElement
+  onResize: =>
+    # resetBackgroundMeterCss - now that position and everything is calculated, grab the css from the input and add it to our backgroundMeterElement
+
+    return unless @backgroundMeterElement?
+
     backgroundMeterCss =
       position: 'absolute'
-#      top: @element.offset().top
-#      left: @element.offset().left
-#      position: 'relative'
-#      display: @element.css('display')
       verticalAlign: @element.css('verticalAlign')
       width: @element.css('width')
       height: @element.css('height')
-#      marginTop: @element.css('marginTop')
-#      marginRight: @element.css('marginRight')
-#      marginBottom: @element.css('marginBottom')
-#      marginLeft: @element.css('marginLeft')
       borderRadius: @element.css('borderRadius')
       'z-index': -1
-#      border: 'solid 1px red'
 
     @backgroundMeterElement.css(backgroundMeterCss)
     @backgroundMeterElement.offset(@element.offset())
@@ -103,18 +96,17 @@ class PasswordInput
   onToggleVisibility: (ev) =>
     ev.preventDefault()
 
-    hideClass = "hide-#{@options.toggleVisibilityClass}"
     if @isShown
       @element.attr('type', 'password')
       if @options.allowToggle is true
-        @toggleVisibilityIconElement.removeClass().addClass(@options.toggleVisibilityClass) if @toggleVisibilityIconElement
-        @toggleVisibilityTextElement.removeClass().addClass(@options.toggleVisibilityClass).html @i18n.show if @toggleVisibilityTextElement
+        @toggleVisibilityIconElement.removeClass('hide-toggle-visibility').addClass('toggle-visibility') if @toggleVisibilityIconElement
+        @toggleVisibilityTextElement.removeClass('hide-toggle-visibility').addClass('toggle-visibility').html @i18n.show if @toggleVisibilityTextElement
       @isShown = false
     else
       @element.attr('type', 'text')
       if @options.allowToggle is true
-        @toggleVisibilityIconElement.removeClass().addClass(hideClass) if @toggleVisibilityIconElement
-        @toggleVisibilityTextElement.removeClass().addClass(hideClass).html @i18n.hide if @toggleVisibilityTextElement
+        @toggleVisibilityIconElement.removeClass('toggle-visibility').addClass('hide-toggle-visibility') if @toggleVisibilityIconElement
+        @toggleVisibilityTextElement.removeClass('toggle-visibility').addClass('hide-toggle-visibility').html @i18n.hide if @toggleVisibilityTextElement
       @isShown = true
 
   onKeyup: (ev) =>
