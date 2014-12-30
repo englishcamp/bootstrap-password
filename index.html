@@ -12,12 +12,12 @@
     </script>
 
     <!-- vendor assets such as jquery and bootstrap-->
-    <link rel="stylesheet" href="css/vendor.css">
-    <script src="js/vendor.js"></script>
+    <link rel="stylesheet" href="../css/vendor.css">
+    <script src="../js/vendor.js"></script>
 
     <!-- bootstrap-password assets-->
-    <link rel="stylesheet" href="css/bootstrap-password.css">
-    <script src="js/bootstrap-password.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap-password.css">
+    <script src="../js/bootstrap-password.js"></script>
 </head>
 
 <body>
@@ -36,7 +36,7 @@
             <li>Coffescript subclassing</li>
         </ul>
         </p>
-        <p>Available direct from github as a bower package.</p>
+        <p>Available <a href="https://github.com/alienfast/bootstrap-password">direct from github</a> as a bower package.</p>
     </div>
 </div>
 
@@ -48,7 +48,7 @@
 
                 <p>As simple as it gets, no frills.</p>
 
-                <p><a class="btn btn-default" href="/demos/basic.html" role="button">View Standalone Demo &raquo;</a>
+                <p><a class="btn btn-default" href="demos/basic.html" role="button">View Standalone Demo &raquo;</a>
                 </p>
             </div>
             <div class="col-md-4">
@@ -165,12 +165,23 @@
                            value="ee3##eeeeu">
                     <span class="help-block">Some helpful text on a good password</span>
                 </div>
+                <div class="form-group">
+                    <label for="elegant-2">With visibility link</label>
+                    <input type="password" class="form-control" id="elegant-2" placeholder="Password" value="abc1223#E">
+                    <span class="help-block">Some helpful text on a good password</span>
+                </div>
+
                 <script>
                     require('bootstrap-password');
                     $(document).ready(function($) {
                         $('#elegant-1').bootstrapPassword(
                                 {
                                     features: ['background-meter']
+                                }
+                        );
+                        $('#elegant-2').bootstrapPassword(
+                                {
+                                    features: ['background-meter', 'toggle-visibility-link']
                                 }
                         );
                     });
