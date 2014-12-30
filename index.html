@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="bootstrap-password : Bootstrap based password field with declarative options and extensive customizability.">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>bootstrap-password</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/alienfast/bootstrap-password">View on GitHub</a>
+
+          <h1 id="project_title">bootstrap-password</h1>
+          <h2 id="project_tagline">Bootstrap based password field with declarative options and extensive customizability.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/alienfast/bootstrap-password/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/alienfast/bootstrap-password/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="bootstrap-password" class="anchor" href="#bootstrap-password" aria-hidden="true"><span class="octicon octicon-link"></span></a>bootstrap-password</h1>
+
+<p>Bootstrap based password field with declarative options and extensive customizability.</p>
+
+<p>Customize via:</p>
+
+<ul>
+<li>Javascript options (html, i18n, calculation regexes or calculation fn)</li>
+<li>CSS overrides</li>
+<li>SCSS variables</li>
+<li>Coffescript subclassing</li>
+</ul>
+
+<p>Available direct from github as a bower package.</p>
+
+<h1>
+<a id="demos" class="anchor" href="#demos" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demos</h1>
+
+<p>Multiple demos available showing customization, start with the <code>index.html</code></p>
+
+<h1>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h1>
+
+<h2>
+<a id="distribution-files" class="anchor" href="#distribution-files" aria-hidden="true"><span class="octicon octicon-link"></span></a>Distribution files</h2>
+
+<p>All distributions are in the <code>public</code> directory.  Necessary files are:</p>
+
+<ul>
+<li>
+<code>js/bootstrap-password.js</code> (or <code>.min</code>)</li>
+<li>
+<code>css/bootstrap-password.css</code> (or the <code>scss</code> files)</li>
+</ul>
+
+<h2>
+<a id="code" class="anchor" href="#code" aria-hidden="true"><span class="octicon octicon-link"></span></a>Code</h2>
+
+<ul>
+<li>Structure a standard bootstrap password field with a surrounding <code>form-group</code>
+</li>
+</ul>
+
+<div class="highlight highlight-html"><pre>    &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>form-group<span class="pl-pds">"</span></span>&gt;
+        &lt;<span class="pl-ent">label</span> <span class="pl-e">for</span>=<span class="pl-s1"><span class="pl-pds">"</span>flair-pw1<span class="pl-pds">"</span></span>&gt;Password&lt;/<span class="pl-ent">label</span>&gt;
+        &lt;<span class="pl-ent">input</span> <span class="pl-e">type</span>=<span class="pl-s1"><span class="pl-pds">"</span>password<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>form-control<span class="pl-pds">"</span></span> <span class="pl-e">id</span>=<span class="pl-s1"><span class="pl-pds">"</span>flair-pw1<span class="pl-pds">"</span></span> <span class="pl-e">placeholder</span>=<span class="pl-s1"><span class="pl-pds">"</span>Password<span class="pl-pds">"</span></span>&gt;
+        &lt;<span class="pl-ent">span</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>help-block<span class="pl-pds">"</span></span>&gt;Some helpful text on a good password&lt;/<span class="pl-ent">span</span>&gt;
+    &lt;/<span class="pl-ent">div</span>&gt;</pre></div>
+
+<ul>
+<li>Initialize the field with options, minimally:</li>
+</ul>
+
+<div class="highlight highlight-javascript"><pre>    <span class="pl-k">&lt;</span>script<span class="pl-k">&gt;</span>
+        <span class="pl-s3">require</span>(<span class="pl-s1"><span class="pl-pds">'</span>bootstrap-password<span class="pl-pds">'</span></span>);
+        $(<span class="pl-s3">document</span>).ready(<span class="pl-st">function</span>(<span class="pl-vpf">$</span>) {
+            $(<span class="pl-s1"><span class="pl-pds">'</span>#flair-pw1<span class="pl-pds">'</span></span>).bootstrapPassword();
+        });
+    <span class="pl-k">&lt;</span>/script<span class="pl-k">&gt;</span></pre></div>
+
+<h1>
+<a id="development" class="anchor" href="#development" aria-hidden="true"><span class="octicon octicon-link"></span></a>Development</h1>
+
+<h2>
+<a id="stack" class="anchor" href="#stack" aria-hidden="true"><span class="octicon octicon-link"></span></a>Stack</h2>
+
+<p>This project is authored in coffescript and scss.</p>
+
+<h3>
+<a id="brunch" class="anchor" href="#brunch" aria-hidden="true"><span class="octicon octicon-link"></span></a>Brunch</h3>
+
+<p><a href="http://brunch.io">Brunch</a> is a html5 application builder that's agnostic to programming langs and frameworks.</p>
+
+<p><code>brunch-config.coffee</code> contains brunch configuration, <code>package.json</code> contains brunch plugins.</p>
+
+<h3>
+<a id="bootstrap" class="anchor" href="#bootstrap" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bootstrap</h3>
+
+<p>The project imports bootstrap variables and utilizes them throughout.  Additionally, like bootstrap, it declares variables that can be overridden
+if you choose to <code>@import</code> the optional <code>scss</code> files as opposed to using the static <code>css</code></p>
+
+<h3>
+<a id="bower" class="anchor" href="#bower" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bower</h3>
+
+<p>It is accessible via the bower package manager.</p>
+
+<h2>
+<a id="getting-started-with-development" class="anchor" href="#getting-started-with-development" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting started with development</h2>
+
+<ul>
+<li>Clone the project.</li>
+<li>Install bower via nodejs: <code>npm install -g bower</code>
+</li>
+<li>Install bower plugins: <code>bower install</code>
+</li>
+<li>Install brunch via nodejs: <code>npm install -g brunch</code>
+</li>
+<li>Install brunch plugins: <code>npm install</code>
+</li>
+<li>Run pre build: <code>cake build:pre</code>
+</li>
+<li>Run dev server: <code>clear; DEBUG='brunch:*,-brunch:source-file,-brunch:watch' brunch watch --server</code>
+</li>
+<li>Open <code>127.0.0.1:3333</code>
+</li>
+<li>Check out some demos</li>
+</ul>
+
+<h3>
+<a id="tests" class="anchor" href="#tests" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tests</h3>
+
+<ul>
+<li>Run tests via RubyMine by running the <code>karma.conf.js</code> file; or</li>
+<li><code>cake build:test</code></li>
+</ul>
+
+<h2>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h2>
+
+<ol>
+<li>Fork it</li>
+<li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>
+<li>Commit your changes (<code>git commit -am 'Add some feature'</code>)</li>
+<li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
+<li>Create new Pull Request</li>
+</ol>
+
+<h2>
+<a id="copyright" class="anchor" href="#copyright" aria-hidden="true"><span class="octicon octicon-link"></span></a>Copyright</h2>
+
+<p>Copyright (c) 2014 AlienFast, LLC and others. See LICENSE.txt for further details.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">bootstrap-password maintained by <a href="https://github.com/alienfast">alienfast</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
