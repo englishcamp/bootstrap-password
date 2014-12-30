@@ -11,10 +11,13 @@
         window.brunch = window.brunch || {};
     </script>
 
+    <!-- vendor assets such as jquery and bootstrap-->
     <link rel="stylesheet" href="../css/vendor.css">
-    <link rel="stylesheet" href="../css/bootstrap-password.css">
-
     <script src="../js/vendor.js"></script>
+
+    <!-- bootstrap-password assets-->
+    <link rel="stylesheet" href="../css/bootstrap-password.css">
+    <script src="../js/bootstrap-password.js"></script>
 </head>
 
 <body>
@@ -28,31 +31,138 @@
 </div>
 
 <div class="container">
-    <!-- Example row of columns -->
-    <div class="row">
-        <div class="col-md-4">
-            <h2>Basic</h2>
+    <form>
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Basic</h2>
 
-            <p>As simple as it gets, no frills.</p>
+                <p>As simple as it gets, no frills.</p>
 
-            <p><a class="btn btn-default" href="/demos/basic.html" role="button">View Demo &raquo;</a></p>
+                <p><a class="btn btn-default" href="/demos/basic.html" role="button">View Standalone Demo &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>Flair</h2>
+
+                <p>This has a lot of flair, with a metered background and font icons.</p>
+
+                <p><a class="btn btn-default" href="/demos/flair.html" role="button">View Standalone Demo &raquo;</a>
+                </p>
+            </div>
+            <div class="col-md-4">
+                <h2>Elegant</h2>
+
+                <p>This one is a little more flair than basic, and a little more basic than flair.</p>
+
+                <p><a class="btn btn-default" href="/demos/elegant.html" role="button">View Standalone Demo &raquo;</a></p>
+            </div>
         </div>
-        <div class="col-md-4">
-            <h2>Flair</h2>
 
-            <p>This has a lot of flair, with a metered background and font icons.</p>
-
-            <p><a class="btn btn-default" href="/demos/flair.html" role="button">View Demo &raquo;</a></p>
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Example</h3>
+                <div class="form-group">
+                    <label for="basic-pw1">Password</label>
+                    <input type="password" class="form-control" id="basic-pw1" placeholder="Password">
+                </div>
+                <script>
+                    require('bootstrap-password');
+                    $(document).ready(function($) {
+                        $('#basic-pw1').bootstrapPassword({
+                            features: ['toggle-visibility-link']
+                        });
+                    });
+                </script>
+            </div>
+            <div class="col-md-4">
+                <h3>Examples</h3>
+                <div class="form-group">
+                    <label for="flair-pw1">Password</label>
+                    <input type="password" class="form-control" id="flair-pw1" placeholder="Password">
+                    <span class="help-block">Some helpful text on a good password</span>
+                </div>
+                <div class="form-group">
+                    <label for="flair-pw2">Different input-group layout</label>
+                    <input type="password" class="form-control" id="flair-pw2" placeholder="Password" value="abc1223#E">
+                </div>
+                <div class="form-group">
+                    <label for="flair-pw3">Just toggle-visibility in input-group</label>
+                    <input type="password" class="form-control" id="flair-pw3" placeholder="Password"
+                           value="ee3##eeeeu">
+                </div>
+                <div class="form-group">
+                    <label for="flair-pw4">Just a background-meter</label>
+                    <input type="password" class="form-control" id="flair-pw4" placeholder="Password" value="ee3##">
+                </div>
+                <div class="form-group">
+                    <label for="flair-pw5">No icons, just text link addon w/customized text</label>
+                    <input type="password" class="form-control" id="flair-pw5" placeholder="Password" value="1">
+                </div>
+                <script>
+//                    require('bootstrap-password');
+                    $(document).ready(function($) {
+                        $('#flair-pw1').bootstrapPassword();
+                        $('#flair-pw2').bootstrapPassword(
+                                {
+                                    features: ['background-meter', 'input-group'],
+                                    'input-group': {
+                                        layout: ['input', 'password-strength', 'toggle-visibility']
+                                    }
+                                }
+                        );
+                        $('#flair-pw3').bootstrapPassword(
+                                {
+                                    features: ['background-meter', 'input-group'],
+                                    'input-group': {
+                                        layout: ['input', 'toggle-visibility']
+                                    }
+                                }
+                        );
+                        $('#flair-pw4').bootstrapPassword(
+                                {
+                                    features: ['background-meter']
+                                }
+                        );
+                        $('#flair-pw5').bootstrapPassword(
+                                {
+                                    features: ['background-meter', 'input-group'],
+                                    'input-group': {
+                                        layout: ['input', 'toggle-visibility'],
+                                        addons: {
+                                            'toggle-visibility': {
+                                                html: '<a href="#" class="toggle-visibility">wah?</a>'
+                                            }
+                                        }
+                                    },
+                                    en: {
+                                        show: 'wah?',
+                                        hide: 'got it!'
+                                    }
+                                }
+                        );
+                    });
+                </script>
+            </div>
+            <div class="col-md-4">
+                <h3>Example</h3>
+                <div class="form-group">
+                    <label for="elegant-1">Password</label>
+                    <input type="password" class="form-control" id="elegant-1" placeholder="Password" value="ee3##eeeeu">
+                    <span class="help-block">Some helpful text on a good password</span>
+                </div>
+                <script>
+                    require('bootstrap-password');
+                    $(document).ready(function($) {
+                        $('#elegant-1').bootstrapPassword(
+                                {
+                                    features: ['background-meter']
+                                }
+                        );
+                    });
+                </script>
+            </div>
         </div>
-        <div class="col-md-4">
-            <h2>Elegant</h2>
 
-            <p>This one is a little more flair than basic, and a little more basic than flair.</p>
-
-            <p><a class="btn btn-default" href="/demos/elegant.html" role="button">View Demo &raquo;</a></p>
-        </div>
-    </div>
-
+    </form>
 </div>
 <footer>
     <div class="container">

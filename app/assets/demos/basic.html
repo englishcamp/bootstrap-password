@@ -46,8 +46,8 @@
             <h1>Basic</h1>
             <form>
                 <div class="form-group">
-                    <label for="myPassword">Password</label>
-                    <input type="password" class="form-control" id="myPassword" placeholder="Password">
+                    <label for="basic-pw1">Password</label>
+                    <input type="password" class="form-control" id="basic-pw1" placeholder="Password">
                 </div>
             </form>
         </div>
@@ -55,16 +55,12 @@
 </div>
 
 
-
-<!--<form action="" method="get" accept-charset="utf-8">-->
-    <!--<input id="myPassword" type="password" name="" value="">-->
-<!--</form>-->
-
-
 <script>
     require('bootstrap-password');
     $(document).ready(function($) {
-        $('#myPassword').bootstrapPassword();
+        $('#basic-pw1').bootstrapPassword({
+            features: ['toggle-visibility-link']
+        });
     });
 </script>
 </body>

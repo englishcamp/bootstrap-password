@@ -3,46 +3,84 @@ class PasswordInput
   constructor: (element, @options) ->
     @element = $(element)
     @id = @element.attr('id')
-    @formGroupElement = @element.parents('.form-group')
-    @formGroupElement.addClass('bootstrap-password')
-    @formGroupElement.addClass('background-metered') if @options.backgroundMeter
-    $.error("Form input ##{@id} must have a surrounding form-group.") unless @formGroupElement.length > 0
-
     @isShown = false
     @i18n = @options[@options.lang]
 
-    # hookup detection
+    @formGroupElement = @element.parents('.form-group')
+    $.error("Form input ##{@id} must have a surrounding form-group.") unless @formGroupElement.length > 0
+
+    @formGroupElement.addClass('bootstrap-password')
+
+    # layout based on the feature options
+    @layoutInputGroup()
+    @layoutMeter()
+    @layoutToggleVisibilityLink()
+
+    # trigger initial strength update and background-meter underlay placement
+    @onKeyup()
+    @onResize()
+
+    # hookup listeners
+    $(window).resize @onResize
     @element.keyup(@onKeyup)
 
-    if @options.icons is true
+    # attach if there is something (this will find inside the form-group allowing for additional triggers)
+    @attachToToggleVisibilityIcon()
+    @attachToToggleVisibilityText()
+
+  layoutToggleVisibilityLink: =>
+    return unless 'toggle-visibility-link' in @options.features
+
+    @toggleVisibilityTextElement = $("<a href='#' class='toggle-visibility'>#{@i18n.show}</a>")
+    @formGroupElement.append @toggleVisibilityTextElement
+
+
+  layoutInputGroup: =>
+    return unless 'input-group' in @options.features
+
+    # find existing input-group
+    @inputGroupElement = @element.parents('.input-group')
+
+    # create input-group
+    if @inputGroupElement.length <= 0
       @inputGroupElement = $('<div class="input-group"></div>')
       @element.wrap @inputGroupElement
-      beforeIcon =
+
+    reachedInput = false
+    for addonKey in @options['input-group'].layout
+      if addonKey is 'input'
+        reachedInput = true
+        continue
+
+      addon = @options['input-group'].addons[addonKey]
+      addonElement =
         $("""
-          <div class="input-group-addon">
-            <span class="icon-password-strength" aria-hidden="true"></span>
-          </div>
-          """)
-      @element.before beforeIcon
+              <div class="input-group-addon">
+                  #{addon.html}
+              </div>
+              """)
+      if reachedInput
+        @element.after addonElement
+      else
+        @element.before addonElement
+
+  attachToToggleVisibilityText: =>
+    @toggleVisibilityTextElement = @formGroupElement.find('a.toggle-visibility') # have to use the finder because the @inputGroupElement is a wrapper and find doesn't appear to work. jquery bug?
+    @toggleVisibilityTextElement = null if @toggleVisibilityTextElement.length <= 0
+    # events to trigger show/hide for password field
+    @toggleVisibilityTextElement?.click(@onToggleVisibility)
 
 
-      # create 'show/hide' toggle icon
-      if @options.allowToggle is true
-        afterIcon =
-        # icon-x temporary for icomoon until we convert
-          $("""
-            <div class="input-group-addon">
-              <span class="toggle-visibility icon-toggle-visibility" aria-hidden="true"></span>
-            </div>
-            """)
+  attachToToggleVisibilityIcon: =>
+    @toggleVisibilityIconElement = @formGroupElement.find('.input-group').find('span.toggle-visibility') # have to use the finder because the @inputGroupElement is a wrapper and find doesn't appear to work. jquery bug?
+    @toggleVisibilityIconElement = null if @toggleVisibilityIconElement.length <= 0
+    # events to trigger show/hide for password field
+    @toggleVisibilityIconElement?.click(@onToggleVisibility)
 
-        @element.after afterIcon
-        @toggleVisibilityIconElement = afterIcon.find(".toggle-visibility")
-        # events to trigger show/hide for password field
-        @toggleVisibilityIconElement.click(@onToggleVisibility)
+  layoutMeter: =>
 
-    if @options.backgroundMeter is true
-
+    if 'background-meter' in @options.features
+      @formGroupElement.addClass('background-metered')
       @backgroundMeterElement = $("<div class='background-meter' />")
       @formGroupElement.append @backgroundMeterElement
 
@@ -62,24 +100,8 @@ class PasswordInput
     @meterLabelElement.appendTo @meterElement
     meterGroupElement.append @meterElement
 
-    # create 'show/hide' toggle and 'text' version of password field (not for the one with the background-meter)
-    if @options.icons is false and @options.allowToggle is true
-      @toggleVisibilityTextElement = $("<a href='#' class='toggle-visibility'>#{@i18n.show}</a>")
-      @formGroupElement.append @toggleVisibilityTextElement
-
-      # events to trigger show/hide for password field
-      @toggleVisibilityTextElement.click(@onToggleVisibility)
-
-    # trigger initial strength update and background-meter underlay placement
-    @onKeyup()
-    @onResize()
-
-    $(window).resize @onResize
-
-
   onResize: =>
     # resetBackgroundMeterCss - now that position and everything is calculated, grab the css from the input and add it to our backgroundMeterElement
-
     return unless @backgroundMeterElement?
 
     backgroundMeterCss =
@@ -98,15 +120,13 @@ class PasswordInput
 
     if @isShown
       @element.attr('type', 'password')
-      if @options.allowToggle is true
-        @toggleVisibilityIconElement.removeClass('hide-toggle-visibility').addClass('toggle-visibility') if @toggleVisibilityIconElement
-        @toggleVisibilityTextElement.removeClass('hide-toggle-visibility').addClass('toggle-visibility').html @i18n.show if @toggleVisibilityTextElement
+      @toggleVisibilityIconElement.removeClass('hide-toggle-visibility').addClass('toggle-visibility') if @toggleVisibilityIconElement
+      @toggleVisibilityTextElement.removeClass('hide-toggle-visibility').addClass('toggle-visibility').html @i18n.show if @toggleVisibilityTextElement
       @isShown = false
     else
       @element.attr('type', 'text')
-      if @options.allowToggle is true
-        @toggleVisibilityIconElement.removeClass('toggle-visibility').addClass('hide-toggle-visibility') if @toggleVisibilityIconElement
-        @toggleVisibilityTextElement.removeClass('toggle-visibility').addClass('hide-toggle-visibility').html @i18n.hide if @toggleVisibilityTextElement
+      @toggleVisibilityIconElement.removeClass('toggle-visibility').addClass('hide-toggle-visibility') if @toggleVisibilityIconElement
+      @toggleVisibilityTextElement.removeClass('toggle-visibility').addClass('hide-toggle-visibility').html @i18n.hide if @toggleVisibilityTextElement
       @isShown = true
 
   onKeyup: (ev) =>
