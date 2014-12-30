@@ -10,6 +10,9 @@ path = require 'path'
 glob = require("glob") # https://github.com/isaacs/node-glob
 rmrf = (require 'rimraf').sync
 mkdirp = require 'mkdirp'
+ncp = require('ncp').ncp;
+
+ncp.limit = 16;
 
 try
   which = require('which').sync
@@ -67,6 +70,7 @@ task 'build:test', ->
 
 
 readFile = (filePath) ->
+  log "readFile(#{filePath})", green
   fs.readFileSync(filePath, {encoding: 'utf8'})
 
 writeFile = (filePath, data) ->
@@ -75,8 +79,8 @@ writeFile = (filePath, data) ->
 copyFile = (sourceFile, destFile) ->
   writeFile(destFile, readFile(sourceFile))
 
-copyAll = (config) ->
-  rmrf(config.dest)
+copyAll = (config, skipRm = false) ->
+  rmrf(config.dest) unless skipRm
 #  fs.mkdirSync(config.dest, 0o0755)
   mkdirp(config.dest)
 
@@ -112,6 +116,19 @@ task 'build:assets-bootstrap-fonts', 'copy the bootstrap fonts in the expected p
     dest: 'public/fonts/bootstrap'
 
   copyAll(config)
+
+
+task 'ghpages', ->
+  invoke 'build:pre'
+  exec 'brunch b'
+  config =
+    src: 'public',
+    dest: '../bootstrap-password-ghpages'
+
+#  copyAll(config, true)
+  ncp config.src, config.dest, (err) ->
+    return console.error(err)  if err
+    console.log "done!"
 
 
 # Cakefile Tasks

@@ -10,11 +10,11 @@ Customize via:
 
 Available direct from github as a bower package.
 
+# Live Demos
+[Multiple demos available showing customization](http://alienfast.github.io/bootstrap-password/)
+
 # Screenshot
 ![Screenshot](screenshots/index.png)
-
-# Demos
-Multiple demos available showing customization, start with the `index.html` in the `public` folder
 
 # Usage
 

@@ -21,6 +21,7 @@
     "mkdirp": "*",
     "glob": "*",
     "path": "*",
+    "ncp": "*",
     "clean-css-brunch": ">= 1.0",
     "coffee-script": ">=1.7.1",
     "coffee-script-brunch": ">= 1.0",
