@@ -14,13 +14,13 @@ Available direct from github as a bower package.
 ![Screenshot](screenshots/index.png)
 
 # Demos
-Multiple demos available showing customization, start with the `index.html`
+Multiple demos available showing customization, start with the `index.html` in the `public` folder
 
 # Usage
 
 ## Distribution files
 All distributions are in the `public` directory.  Necessary files are:
-* `js/bootstrap-password.js` (or `.min`)
+* `js/bootstrap-password.js`
 * `css/bootstrap-password.css` (or the `scss` files)
 
 ## Code

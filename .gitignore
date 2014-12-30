@@ -27,7 +27,7 @@ node_modules/
 tmp/
 
 # Brunch output folder.
-public/*
+#public/*
 
 # generated files that should be regenerated prior to cake or brunch build.
 app/lib/locales
