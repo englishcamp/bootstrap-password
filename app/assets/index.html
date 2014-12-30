@@ -26,7 +26,17 @@
     <div class="container">
         <h1>bootstrap-password</h1>
 
-        <p>This is an extensible coffeescript class/scss based password enhancer provided as a bower package.</p>
+        <p class="lead">Bootstrap based password field with declarative options and extensive customizability.</p>
+
+        <p>Customize via:
+        <ul>
+            <li>Javascript options</li>
+            <li>Css overrides</li>
+            <li>SCSS variables</li>
+            <li>Coffescript subclassing</li>
+        </ul>
+        </p>
+        <p>Available direct from github as a bower package.</p>
     </div>
 </div>
 
@@ -38,7 +48,8 @@
 
                 <p>As simple as it gets, no frills.</p>
 
-                <p><a class="btn btn-default" href="/demos/basic.html" role="button">View Standalone Demo &raquo;</a></p>
+                <p><a class="btn btn-default" href="/demos/basic.html" role="button">View Standalone Demo &raquo;</a>
+                </p>
             </div>
             <div class="col-md-4">
                 <h2>Flair</h2>
@@ -53,13 +64,15 @@
 
                 <p>This one is a little more flair than basic, and a little more basic than flair.</p>
 
-                <p><a class="btn btn-default" href="/demos/elegant.html" role="button">View Standalone Demo &raquo;</a></p>
+                <p><a class="btn btn-default" href="/demos/elegant.html" role="button">View Standalone Demo &raquo;</a>
+                </p>
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-4">
                 <h3>Example</h3>
+
                 <div class="form-group">
                     <label for="basic-pw1">Password</label>
                     <input type="password" class="form-control" id="basic-pw1" placeholder="Password">
@@ -75,6 +88,7 @@
             </div>
             <div class="col-md-4">
                 <h3>Examples</h3>
+
                 <div class="form-group">
                     <label for="flair-pw1">Password</label>
                     <input type="password" class="form-control" id="flair-pw1" placeholder="Password">
@@ -98,7 +112,7 @@
                     <input type="password" class="form-control" id="flair-pw5" placeholder="Password" value="1">
                 </div>
                 <script>
-//                    require('bootstrap-password');
+                    //                    require('bootstrap-password');
                     $(document).ready(function($) {
                         $('#flair-pw1').bootstrapPassword();
                         $('#flair-pw2').bootstrapPassword(
@@ -144,9 +158,11 @@
             </div>
             <div class="col-md-4">
                 <h3>Example</h3>
+
                 <div class="form-group">
                     <label for="elegant-1">Password</label>
-                    <input type="password" class="form-control" id="elegant-1" placeholder="Password" value="ee3##eeeeu">
+                    <input type="password" class="form-control" id="elegant-1" placeholder="Password"
+                           value="ee3##eeeeu">
                     <span class="help-block">Some helpful text on a good password</span>
                 </div>
                 <script>

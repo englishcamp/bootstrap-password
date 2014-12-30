@@ -1,19 +1,44 @@
 bootstrap-password
 ===========
-jQuery password input plugin for bootstrap with a strength indicator and hide/show password.
+Bootstrap based password field with declarative options and extensive customizability.
 
-WORK IN PROGRESS
+Customize via:
+* Javascript options (html, i18n, calculation regexes or calculation fn)
+* CSS overrides
+* SCSS variables
+* Coffescript subclassing
 
-# Why
-I needed something configurable, usable with bootstrap, and preferably coffeescript and driven by scss variables/mixins etc.
+Available direct from github as a bower package.
+
+# Demos
+Multiple demos available showing customization, start with the `index.html`
 
 # Usage
-TODO
 
 ## Distribution files
 All distributions are in the `public` directory.  Necessary files are:
 * `js/bootstrap-password.js` (or `.min`)
 * `css/bootstrap-password.css` (or the `scss` files)
+
+## Code
+* Structure a standard bootstrap password field with a surrounding `form-group`
+```html
+    <div class="form-group">
+        <label for="flair-pw1">Password</label>
+        <input type="password" class="form-control" id="flair-pw1" placeholder="Password">
+        <span class="help-block">Some helpful text on a good password</span>
+    </div>
+```
+* Initialize the field with options, minimally:
+```javascript
+    <script>
+        require('bootstrap-password');
+        $(document).ready(function($) {
+            $('#flair-pw1').bootstrapPassword();
+        });
+    </script>
+```
+
 
 # Development
 
