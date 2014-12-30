@@ -4,6 +4,8 @@ class PasswordInput
     @element = $(element)
     @id = @element.attr('id')
     @formGroupElement = @element.parents('.form-group')
+    @formGroupElement.addClass('bootstrap-password')
+    @formGroupElement.addClass('background-metered') if @options.backgroundMeter
     $.error("Form input ##{@id} must have a surrounding form-group.") unless @formGroupElement.length > 0
 
     @isShown = false
@@ -12,12 +14,10 @@ class PasswordInput
     # hookup detection
     @element.keyup(@onKeyup)
 
-    afterElement = @element
-
     # create wrapper if requested
     if @options.backgroundMeter is true
 
-      @inputGroupElement = $('<div class="input-group" />')
+      @inputGroupElement = $('<div class="input-group"></div>')
       @element.wrap @inputGroupElement
       beforeIcon =
         $("""
@@ -45,31 +45,24 @@ class PasswordInput
         # events to trigger show/hide for password field
         @toggleVisibilityIconElement.click(@onToggleVisibility)
 
+      @backgroundMeterElement = $("<div class='#{@options.backgroundMeterClass}' />")
+      @formGroupElement.append @backgroundMeterElement
 
-      backgroundMeterCss =
-        position: 'relative'
-        display: @element.css('display')
-        verticalAlign: @element.css('verticalAlign')
-        width: @element.css('width')
-        height: @element.css('height')
-        marginTop: @element.css('marginTop')
-        marginRight: @element.css('marginRight')
-        marginBottom: @element.css('marginBottom')
-        marginLeft: @element.css('marginLeft')
-        fontSize: @element.css('fontSize')
-        borderRadius: @element.css('borderRadius')
-
-      @backgroundMeterElement = $('<div />').addClass(@options.backgroundMeterClass).css(backgroundMeterCss)
-      @element.wrap @backgroundMeterElement
+      meterGroupElement = @backgroundMeterElement
+      @resetBackgroundMeterCss()
 
     # create strength meter outer div and inner label.  Looks like:
     #    <div class="meter">
     #      <div class="none">Strength</div>
     #    </div>
+    unless meterGroupElement
+      meterGroupElement = $("<div class='meter-group'/>")
+      @element.after meterGroupElement
+
     @meterElement = $("<div class='#{@options.meterClass}'>")
     @meterLabelElement = $("<div>#{@i18n.meter.none}</div>")
     @meterLabelElement.appendTo @meterElement
-    afterElement = afterElement.after @meterElement
+    meterGroupElement.append @meterElement
 
     # create 'show/hide' toggle and 'text' version of password field (not for the one with the background-meter)
     if @options.backgroundMeter is false and @options.allowToggle is true
@@ -89,7 +82,30 @@ class PasswordInput
     # trigger initial strength update
     @onKeyup()
 
+    $(window).resize @resetBackgroundMeterCss
 
+
+  resetBackgroundMeterCss: =>
+    # now that position and everything is calculated, grab the css from the input and add it to our backgroundMeterElement
+    backgroundMeterCss =
+      position: 'absolute'
+#      top: @element.offset().top
+#      left: @element.offset().left
+#      position: 'relative'
+#      display: @element.css('display')
+      verticalAlign: @element.css('verticalAlign')
+      width: @element.css('width')
+      height: @element.css('height')
+#      marginTop: @element.css('marginTop')
+#      marginRight: @element.css('marginRight')
+#      marginBottom: @element.css('marginBottom')
+#      marginLeft: @element.css('marginLeft')
+      borderRadius: @element.css('borderRadius')
+      'z-index': -1
+#      border: 'solid 1px red'
+
+    @backgroundMeterElement.css(backgroundMeterCss)
+    @backgroundMeterElement.offset(@element.offset())
 
   onToggleVisibility: (ev) =>
     ev.preventDefault()
