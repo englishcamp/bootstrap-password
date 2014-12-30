@@ -9,9 +9,9 @@ $.fn.extend
   _defaultOptions:
 
     lang: 'en'
-    allowShow: true
-    meterGroup: false
-    meterGroupClass: 'meter-group'
+    allowShow: false
+    backgroundMeter: false
+    backgroundMeterClass: 'background-meter'
     meterClass: 'meter'
     toggleVisibilityClass: 'toggle-visibility'
 

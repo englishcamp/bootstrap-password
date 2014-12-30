@@ -2,24 +2,51 @@ class PasswordInput
 
   constructor: (element, @options) ->
     @element = $(element)
-    @formGroup = @element.parents('.form-group')
-
     @id = @element.attr('id')
+    @formGroupElement = @element.parents('.form-group')
+    $.error("Form input ##{@id} must have a surrounding form-group.") unless @formGroupElement.length > 0
+
     @isShown = false
     @i18n = @options[@options.lang]
 
     # hookup detection
     @element.keyup(@onKeyup)
 
+    afterElement = @element
+
     # create wrapper if requested
-    if @options.meterGroup is true
+    if @options.backgroundMeter is true
 
-      # does the input even need a wrapper? Does one already exist?
-      #      parent = @element.parent()
-      #      return  if (parent.css('position') is 'relative' or parent.css('position') is 'absolute') and parent.width() is @element.width() and parent.height() is @element.height()
+      @inputGroupElement = $('<div class="input-group" />')
+      @element.wrap @inputGroupElement
+      beforeIcon =
+        $("""
+          <div class="input-group-addon">
+            <span class="glyphicon glyphicon-before-password" aria-hidden="true"></span>
+          </div>
+          """)
+      @element.before beforeIcon
 
-      # else create one
-      wrapperCSS =
+
+      # create 'show/hide' toggle icon
+      if @options.allowShow is true
+        afterIcon =
+        # icon-x temporary for icomoon until we convert
+          $("""
+            <div class="input-group-addon">
+              <a href='#' class='#{@options.toggleVisibilityClass}'>
+                <span class="glyphicon glyphicon-after-password" aria-hidden="true"></span>
+              </a>
+            </div>
+            """)
+
+        @element.after afterIcon
+        @toggleVisibilityIconElement = afterIcon.find(".#{@options.toggleVisibilityClass}")
+        # events to trigger show/hide for password field
+        @toggleVisibilityIconElement.click(@onToggleVisibility)
+
+
+      backgroundMeterCss =
         position: 'relative'
         display: @element.css('display')
         verticalAlign: @element.css('verticalAlign')
@@ -32,8 +59,8 @@ class PasswordInput
         fontSize: @element.css('fontSize')
         borderRadius: @element.css('borderRadius')
 
-      @element.wrap $('<div />').addClass(@options.meterGroupClass).css(wrapperCSS)
-
+      @backgroundMeterElement = $('<div />').addClass(@options.backgroundMeterClass).css(backgroundMeterCss)
+      @element.wrap @backgroundMeterElement
 
     # create strength meter outer div and inner label.  Looks like:
     #    <div class="meter">
@@ -42,38 +69,43 @@ class PasswordInput
     @meterElement = $("<div class='#{@options.meterClass}'>")
     @meterLabelElement = $("<div>#{@i18n.meter.none}</div>")
     @meterLabelElement.appendTo @meterElement
-    @element.after @meterElement
+    afterElement = afterElement.after @meterElement
 
-    # create 'show/hide' toggle and 'text' version of password field
-    if @options.allowShow is true
-      @showHideElement = $("<a href='#' class='#{@options.toggleVisibilityClass}'>#{@i18n.show}</a>")
-      @element.after @showHideElement
+    # create 'show/hide' toggle and 'text' version of password field (not for the one with the background-meter)
+    if @options.backgroundMeter is false and @options.allowShow is true
+      @toggleVisibilityTextElement = $("<a href='#' class='#{@options.toggleVisibilityClass}'>#{@i18n.show}</a>")
+      afterElement.after @toggleVisibilityTextElement
 
       # events to trigger show/hide for password field
-      @showHideElement.click(@onShowHideClick)
+      @toggleVisibilityTextElement.click(@onToggleVisibility)
 
 
     # alter css dynamically as necessary to match the input's
-    if @options.meterGroup is true
+    if @options.backgroundMeter is true
       meterLabelCss =
         borderRadius: @element.css('borderRadius')
       @meterLabelElement.css(meterLabelCss)
 
+    # trigger initial strength update
+    @onKeyup()
 
 
-  onShowHideClick: (ev) =>
+
+  onToggleVisibility: (ev) =>
     ev.preventDefault()
 
     hideClass = "hide-#{@options.toggleVisibilityClass}"
     if @isShown
       @element.attr('type', 'password')
       if @options.allowShow is true
-        @showHideElement.removeClass(hideClass).html @i18n.show
+        @toggleVisibilityIconElement.removeClass().addClass(@options.toggleVisibilityClass) if @toggleVisibilityIconElement
+        @toggleVisibilityTextElement.removeClass().addClass(@options.toggleVisibilityClass).html @i18n.show if @toggleVisibilityTextElement
       @isShown = false
     else
       @element.attr('type', 'text')
       if @options.allowShow is true
-        @showHideElement.addClass(hideClass).html @i18n.hide
+        @toggleVisibilityIconElement.removeClass().addClass(hideClass) if @toggleVisibilityIconElement
+        @toggleVisibilityTextElement.removeClass().addClass(hideClass).html @i18n.hide if @toggleVisibilityTextElement
       @isShown = true
 
   onKeyup: (ev) =>
@@ -82,7 +114,10 @@ class PasswordInput
     @updateUI strength
 
   updateUI: (strength) =>
-    @meterLabelElement.removeClass().addClass(strength)
+    for cssClass in ['strong', 'medium', 'weak', 'veryWeak', 'none']
+      @formGroupElement.removeClass(cssClass)
+
+    @formGroupElement.addClass(strength)
 
     switch strength
       when 'strong', 'medium', 'weak', 'none'
