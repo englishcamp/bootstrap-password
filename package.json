@@ -1,8 +1,8 @@
 {
   "author": "Kevin Ross",
   "name": "bootstrap-password",
-  "description": "AlienFast bootstrap-password",
-  "version": "0.0.1",
+  "description": "bootstrap-password",
+  "version": "1.0.0",
   "homepage": "https://github.com/alienfast/bootstrap-password",
   "repository": {
     "type": "git",

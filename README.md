@@ -10,6 +10,9 @@ Customize via:
 
 Available direct from github as a bower package.
 
+# Screenshot
+![Screenshot](screenshots/index.png)
+
 # Demos
 Multiple demos available showing customization, start with the `index.html`
 
