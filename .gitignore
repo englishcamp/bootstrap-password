@@ -29,8 +29,17 @@ tmp/
 # Brunch output folder.
 #public/*
 
+# selective things out of the brunch output folder
+public/css/vendor*
+public/index.html
+public/demos
+public/fonts/bootstrap
+public/js/vendor*
+
 # generated files that should be regenerated prior to cake or brunch build.
 app/lib/locales
 
 # Bower stuff.
 bower_components/
+
+
