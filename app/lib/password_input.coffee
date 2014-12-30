@@ -156,17 +156,17 @@ class PasswordInput
     else
       calculation = @defaultCalculation
 
-    calculation(newValue)
+    calculation(newValue, @options)
 
-  defaultCalculation: (newValue) =>
+  defaultCalculation: (newValue, options) =>
     # check the password against the regexes given in the options (defaulted as well)
     if newValue.length is 0
       'none'
-    else if newValue.search(@options.calculation.strongTest) >= 0
+    else if newValue.search(options.calculation.strongTest) >= 0
       'strong'
-    else if newValue.search(@options.calculation.mediumTest) >= 0
+    else if newValue.search(options.calculation.mediumTest) >= 0
       'medium'
-    else if newValue.search(@options.calculation.weakTest) >= 0
+    else if newValue.search(options.calculation.weakTest) >= 0
       'weak'
     else
       'veryWeak'
