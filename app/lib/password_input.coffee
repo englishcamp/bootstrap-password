@@ -14,9 +14,7 @@ class PasswordInput
     # hookup detection
     @element.keyup(@onKeyup)
 
-    # create wrapper if requested
-    if @options.backgroundMeter is true
-
+    if @options.icons is true
       @inputGroupElement = $('<div class="input-group"></div>')
       @element.wrap @inputGroupElement
       beforeIcon =
@@ -44,6 +42,8 @@ class PasswordInput
         @toggleVisibilityIconElement = afterIcon.find(".#{@options.toggleVisibilityClass}")
         # events to trigger show/hide for password field
         @toggleVisibilityIconElement.click(@onToggleVisibility)
+
+    if @options.backgroundMeter is true
 
       @backgroundMeterElement = $("<div class='#{@options.backgroundMeterClass}' />")
       @formGroupElement.append @backgroundMeterElement

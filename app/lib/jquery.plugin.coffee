@@ -11,6 +11,8 @@ $.fn.extend
     lang: 'en'
     allowToggle: true
     backgroundMeter: false
+    icons: false
+
     backgroundMeterClass: 'background-meter'
     meterClass: 'meter'
     toggleVisibilityClass: 'toggle-visibility'
