@@ -1,180 +1,201 @@
 <!DOCTYPE html>
-<html>
-
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="bootstrap-password : Bootstrap based password field with declarative options and extensive customizability.">
-
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>bootstrap-password</title>
-  </head>
+    <script>
+        // Enable Brunch HTML/CSS Auto Reload
+        window.brunch = window.brunch || {};
+    </script>
 
-  <body>
+    <!-- vendor assets such as jquery and bootstrap-->
+    <link rel="stylesheet" href="../css/vendor.css">
+    <script src="../js/vendor.js"></script>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/alienfast/bootstrap-password">View on GitHub</a>
+    <!-- bootstrap-password assets-->
+    <link rel="stylesheet" href="../css/bootstrap-password.css">
+    <script src="../js/bootstrap-password.js"></script>
+</head>
 
-          <h1 id="project_title">bootstrap-password</h1>
-          <h2 id="project_tagline">Bootstrap based password field with declarative options and extensive customizability.</h2>
+<body>
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+    <div class="container">
+        <h1>bootstrap-password</h1>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/alienfast/bootstrap-password/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/alienfast/bootstrap-password/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
+        <p class="lead">Bootstrap based password field with declarative options and extensive customizability.</p>
+
+        <p>Customize via:
+        <ul>
+            <li>Javascript options</li>
+            <li>Css overrides</li>
+            <li>SCSS variables</li>
+            <li>Coffescript subclassing</li>
+        </ul>
+        </p>
+        <p>Available direct from github as a bower package.</p>
     </div>
+</div>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h1>
-<a id="bootstrap-password" class="anchor" href="#bootstrap-password" aria-hidden="true"><span class="octicon octicon-link"></span></a>bootstrap-password</h1>
+<div class="container">
+    <form>
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Basic</h2>
 
-<p>Bootstrap based password field with declarative options and extensive customizability.</p>
+                <p>As simple as it gets, no frills.</p>
 
-<p>Customize via:</p>
+                <p><a class="btn btn-default" href="/demos/basic.html" role="button">View Standalone Demo &raquo;</a>
+                </p>
+            </div>
+            <div class="col-md-4">
+                <h2>Flair</h2>
 
-<ul>
-<li>Javascript options (html, i18n, calculation regexes or calculation fn)</li>
-<li>CSS overrides</li>
-<li>SCSS variables</li>
-<li>Coffescript subclassing</li>
-</ul>
+                <p>This has a lot of flair, with a metered background and font icons.</p>
 
-<p>Available direct from github as a bower package.</p>
+                <p><a class="btn btn-default" href="/demos/flair.html" role="button">View Standalone Demo &raquo;</a>
+                </p>
+            </div>
+            <div class="col-md-4">
+                <h2>Elegant</h2>
 
-<h1>
-<a id="demos" class="anchor" href="#demos" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demos</h1>
+                <p>This one is a little more flair than basic, and a little more basic than flair.</p>
 
-<p>Multiple demos available showing customization, start with the <code>index.html</code></p>
+                <p><a class="btn btn-default" href="/demos/elegant.html" role="button">View Standalone Demo &raquo;</a>
+                </p>
+            </div>
+        </div>
 
-<h1>
-<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h1>
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Example</h3>
 
-<h2>
-<a id="distribution-files" class="anchor" href="#distribution-files" aria-hidden="true"><span class="octicon octicon-link"></span></a>Distribution files</h2>
+                <div class="form-group">
+                    <label for="basic-pw1">Password</label>
+                    <input type="password" class="form-control" id="basic-pw1" placeholder="Password">
+                </div>
+                <script>
+                    require('bootstrap-password');
+                    $(document).ready(function($) {
+                        $('#basic-pw1').bootstrapPassword({
+                            features: ['toggle-visibility-link']
+                        });
+                    });
+                </script>
+            </div>
+            <div class="col-md-4">
+                <h3>Examples</h3>
 
-<p>All distributions are in the <code>public</code> directory.  Necessary files are:</p>
+                <div class="form-group">
+                    <label for="flair-pw1">Password</label>
+                    <input type="password" class="form-control" id="flair-pw1" placeholder="Password">
+                    <span class="help-block">Some helpful text on a good password</span>
+                </div>
+                <div class="form-group">
+                    <label for="flair-pw2">Different input-group layout</label>
+                    <input type="password" class="form-control" id="flair-pw2" placeholder="Password" value="abc1223#E">
+                </div>
+                <div class="form-group">
+                    <label for="flair-pw3">Just toggle-visibility in input-group</label>
+                    <input type="password" class="form-control" id="flair-pw3" placeholder="Password"
+                           value="ee3##eeeeu">
+                </div>
+                <div class="form-group">
+                    <label for="flair-pw4">Just a background-meter</label>
+                    <input type="password" class="form-control" id="flair-pw4" placeholder="Password" value="ee3##">
+                </div>
+                <div class="form-group">
+                    <label for="flair-pw5">No icons, just text link addon w/customized text</label>
+                    <input type="password" class="form-control" id="flair-pw5" placeholder="Password" value="1">
+                </div>
+                <script>
+                    //                    require('bootstrap-password');
+                    $(document).ready(function($) {
+                        $('#flair-pw1').bootstrapPassword();
+                        $('#flair-pw2').bootstrapPassword(
+                                {
+                                    features: ['background-meter', 'input-group'],
+                                    'input-group': {
+                                        layout: ['input', 'password-strength', 'toggle-visibility']
+                                    }
+                                }
+                        );
+                        $('#flair-pw3').bootstrapPassword(
+                                {
+                                    features: ['background-meter', 'input-group'],
+                                    'input-group': {
+                                        layout: ['input', 'toggle-visibility']
+                                    }
+                                }
+                        );
+                        $('#flair-pw4').bootstrapPassword(
+                                {
+                                    features: ['background-meter']
+                                }
+                        );
+                        $('#flair-pw5').bootstrapPassword(
+                                {
+                                    features: ['background-meter', 'input-group'],
+                                    'input-group': {
+                                        layout: ['input', 'toggle-visibility'],
+                                        addons: {
+                                            'toggle-visibility': {
+                                                html: '<a href="#" class="toggle-visibility">wah?</a>'
+                                            }
+                                        }
+                                    },
+                                    en: {
+                                        show: 'wah?',
+                                        hide: 'got it!'
+                                    }
+                                }
+                        );
+                    });
+                </script>
+            </div>
+            <div class="col-md-4">
+                <h3>Example</h3>
 
-<ul>
-<li>
-<code>js/bootstrap-password.js</code> (or <code>.min</code>)</li>
-<li>
-<code>css/bootstrap-password.css</code> (or the <code>scss</code> files)</li>
-</ul>
+                <div class="form-group">
+                    <label for="elegant-1">Password</label>
+                    <input type="password" class="form-control" id="elegant-1" placeholder="Password"
+                           value="ee3##eeeeu">
+                    <span class="help-block">Some helpful text on a good password</span>
+                </div>
+                <script>
+                    require('bootstrap-password');
+                    $(document).ready(function($) {
+                        $('#elegant-1').bootstrapPassword(
+                                {
+                                    features: ['background-meter']
+                                }
+                        );
+                    });
+                </script>
+            </div>
+        </div>
 
-<h2>
-<a id="code" class="anchor" href="#code" aria-hidden="true"><span class="octicon octicon-link"></span></a>Code</h2>
-
-<ul>
-<li>Structure a standard bootstrap password field with a surrounding <code>form-group</code>
-</li>
-</ul>
-
-<div class="highlight highlight-html"><pre>    &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>form-group<span class="pl-pds">"</span></span>&gt;
-        &lt;<span class="pl-ent">label</span> <span class="pl-e">for</span>=<span class="pl-s1"><span class="pl-pds">"</span>flair-pw1<span class="pl-pds">"</span></span>&gt;Password&lt;/<span class="pl-ent">label</span>&gt;
-        &lt;<span class="pl-ent">input</span> <span class="pl-e">type</span>=<span class="pl-s1"><span class="pl-pds">"</span>password<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>form-control<span class="pl-pds">"</span></span> <span class="pl-e">id</span>=<span class="pl-s1"><span class="pl-pds">"</span>flair-pw1<span class="pl-pds">"</span></span> <span class="pl-e">placeholder</span>=<span class="pl-s1"><span class="pl-pds">"</span>Password<span class="pl-pds">"</span></span>&gt;
-        &lt;<span class="pl-ent">span</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>help-block<span class="pl-pds">"</span></span>&gt;Some helpful text on a good password&lt;/<span class="pl-ent">span</span>&gt;
-    &lt;/<span class="pl-ent">div</span>&gt;</pre></div>
-
-<ul>
-<li>Initialize the field with options, minimally:</li>
-</ul>
-
-<div class="highlight highlight-javascript"><pre>    <span class="pl-k">&lt;</span>script<span class="pl-k">&gt;</span>
-        <span class="pl-s3">require</span>(<span class="pl-s1"><span class="pl-pds">'</span>bootstrap-password<span class="pl-pds">'</span></span>);
-        $(<span class="pl-s3">document</span>).ready(<span class="pl-st">function</span>(<span class="pl-vpf">$</span>) {
-            $(<span class="pl-s1"><span class="pl-pds">'</span>#flair-pw1<span class="pl-pds">'</span></span>).bootstrapPassword();
-        });
-    <span class="pl-k">&lt;</span>/script<span class="pl-k">&gt;</span></pre></div>
-
-<h1>
-<a id="development" class="anchor" href="#development" aria-hidden="true"><span class="octicon octicon-link"></span></a>Development</h1>
-
-<h2>
-<a id="stack" class="anchor" href="#stack" aria-hidden="true"><span class="octicon octicon-link"></span></a>Stack</h2>
-
-<p>This project is authored in coffescript and scss.</p>
-
-<h3>
-<a id="brunch" class="anchor" href="#brunch" aria-hidden="true"><span class="octicon octicon-link"></span></a>Brunch</h3>
-
-<p><a href="http://brunch.io">Brunch</a> is a html5 application builder that's agnostic to programming langs and frameworks.</p>
-
-<p><code>brunch-config.coffee</code> contains brunch configuration, <code>package.json</code> contains brunch plugins.</p>
-
-<h3>
-<a id="bootstrap" class="anchor" href="#bootstrap" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bootstrap</h3>
-
-<p>The project imports bootstrap variables and utilizes them throughout.  Additionally, like bootstrap, it declares variables that can be overridden
-if you choose to <code>@import</code> the optional <code>scss</code> files as opposed to using the static <code>css</code></p>
-
-<h3>
-<a id="bower" class="anchor" href="#bower" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bower</h3>
-
-<p>It is accessible via the bower package manager.</p>
-
-<h2>
-<a id="getting-started-with-development" class="anchor" href="#getting-started-with-development" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting started with development</h2>
-
-<ul>
-<li>Clone the project.</li>
-<li>Install bower via nodejs: <code>npm install -g bower</code>
-</li>
-<li>Install bower plugins: <code>bower install</code>
-</li>
-<li>Install brunch via nodejs: <code>npm install -g brunch</code>
-</li>
-<li>Install brunch plugins: <code>npm install</code>
-</li>
-<li>Run pre build: <code>cake build:pre</code>
-</li>
-<li>Run dev server: <code>clear; DEBUG='brunch:*,-brunch:source-file,-brunch:watch' brunch watch --server</code>
-</li>
-<li>Open <code>127.0.0.1:3333</code>
-</li>
-<li>Check out some demos</li>
-</ul>
-
-<h3>
-<a id="tests" class="anchor" href="#tests" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tests</h3>
-
-<ul>
-<li>Run tests via RubyMine by running the <code>karma.conf.js</code> file; or</li>
-<li><code>cake build:test</code></li>
-</ul>
-
-<h2>
-<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h2>
-
-<ol>
-<li>Fork it</li>
-<li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>
-<li>Commit your changes (<code>git commit -am 'Add some feature'</code>)</li>
-<li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
-<li>Create new Pull Request</li>
-</ol>
-
-<h2>
-<a id="copyright" class="anchor" href="#copyright" aria-hidden="true"><span class="octicon octicon-link"></span></a>Copyright</h2>
-
-<p>Copyright (c) 2014 AlienFast, LLC and others. See LICENSE.txt for further details.</p>
-      </section>
+    </form>
+</div>
+<footer>
+    <div class="container">
+        <hr>
+        <p>&copy; AlienFast, LLC 2014</p>
     </div>
+</footer>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">bootstrap-password maintained by <a href="https://github.com/alienfast">alienfast</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
 
-    
+<script src="../js/bootstrap-password.js"></script>
 
-  </body>
+<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+<!--<script>-->
+<!--var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];-->
+<!--(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];-->
+<!--g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';-->
+<!--s.parentNode.insertBefore(g,s)}(document,'script'));-->
+<!--</script>-->
+</body>
 </html>
