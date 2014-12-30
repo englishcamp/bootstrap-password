@@ -9,7 +9,7 @@ $.fn.extend
   _defaultOptions:
 
     lang: 'en'
-    allowShow: false
+    allowToggle: true
     backgroundMeter: false
     backgroundMeterClass: 'background-meter'
     meterClass: 'meter'

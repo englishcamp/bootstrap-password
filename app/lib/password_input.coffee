@@ -29,7 +29,7 @@ class PasswordInput
 
 
       # create 'show/hide' toggle icon
-      if @options.allowShow is true
+      if @options.allowToggle is true
         afterIcon =
         # icon-x temporary for icomoon until we convert
           $("""
@@ -72,7 +72,7 @@ class PasswordInput
     afterElement = afterElement.after @meterElement
 
     # create 'show/hide' toggle and 'text' version of password field (not for the one with the background-meter)
-    if @options.backgroundMeter is false and @options.allowShow is true
+    if @options.backgroundMeter is false and @options.allowToggle is true
       @toggleVisibilityTextElement = $("<a href='#' class='#{@options.toggleVisibilityClass}'>#{@i18n.show}</a>")
       afterElement.after @toggleVisibilityTextElement
 
@@ -97,13 +97,13 @@ class PasswordInput
     hideClass = "hide-#{@options.toggleVisibilityClass}"
     if @isShown
       @element.attr('type', 'password')
-      if @options.allowShow is true
+      if @options.allowToggle is true
         @toggleVisibilityIconElement.removeClass().addClass(@options.toggleVisibilityClass) if @toggleVisibilityIconElement
         @toggleVisibilityTextElement.removeClass().addClass(@options.toggleVisibilityClass).html @i18n.show if @toggleVisibilityTextElement
       @isShown = false
     else
       @element.attr('type', 'text')
-      if @options.allowShow is true
+      if @options.allowToggle is true
         @toggleVisibilityIconElement.removeClass().addClass(hideClass) if @toggleVisibilityIconElement
         @toggleVisibilityTextElement.removeClass().addClass(hideClass).html @i18n.hide if @toggleVisibilityTextElement
       @isShown = true
