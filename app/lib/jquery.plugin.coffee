@@ -29,10 +29,10 @@ $.fn.extend
         medium: 'Medium'
         strong: 'Strong'
         none: 'Strength'
-      show: 'Show Password'
-      hide: 'Hide Password'
+      show: 'Show'
+      hide: 'Hide'
 
-    # calculation can be a function, or users can override the test regexes below
+    # calculation can be a function (#calculation(newValue, options)), or users can override the test regexes below
     calculation:
       weakTest: /^[a-zA-Z0-9]{6,}$/
       mediumTest: /^(?=.*\d)(?=.*[a-z])(?!.*\s).{8,}$|^(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,}$/

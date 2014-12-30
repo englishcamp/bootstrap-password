@@ -124,8 +124,8 @@ $.fn.extend({
         strong: 'Strong',
         none: 'Strength'
       },
-      show: 'Show Password',
-      hide: 'Hide Password'
+      show: 'Show',
+      hide: 'Hide'
     },
     calculation: {
       weakTest: /^[a-zA-Z0-9]{6,}$/,
@@ -342,17 +342,17 @@ PasswordInput = (function() {
     } else {
       calculation = this.defaultCalculation;
     }
-    return calculation(newValue);
+    return calculation(newValue, this.options);
   };
 
-  PasswordInput.prototype.defaultCalculation = function(newValue) {
+  PasswordInput.prototype.defaultCalculation = function(newValue, options) {
     if (newValue.length === 0) {
       return 'none';
-    } else if (newValue.search(this.options.calculation.strongTest) >= 0) {
+    } else if (newValue.search(options.calculation.strongTest) >= 0) {
       return 'strong';
-    } else if (newValue.search(this.options.calculation.mediumTest) >= 0) {
+    } else if (newValue.search(options.calculation.mediumTest) >= 0) {
       return 'medium';
-    } else if (newValue.search(this.options.calculation.weakTest) >= 0) {
+    } else if (newValue.search(options.calculation.weakTest) >= 0) {
       return 'weak';
     } else {
       return 'veryWeak';
