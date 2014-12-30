@@ -65,19 +65,12 @@ class PasswordInput
     meterGroupElement.append @meterElement
 
     # create 'show/hide' toggle and 'text' version of password field (not for the one with the background-meter)
-    if @options.backgroundMeter is false and @options.allowToggle is true
+    if @options.icons is false and @options.allowToggle is true
       @toggleVisibilityTextElement = $("<a href='#' class='#{@options.toggleVisibilityClass}'>#{@i18n.show}</a>")
-      afterElement.after @toggleVisibilityTextElement
+      @formGroupElement.append @toggleVisibilityTextElement
 
       # events to trigger show/hide for password field
       @toggleVisibilityTextElement.click(@onToggleVisibility)
-
-
-    # alter css dynamically as necessary to match the input's
-    if @options.backgroundMeter is true
-      meterLabelCss =
-        borderRadius: @element.css('borderRadius')
-      @meterLabelElement.css(meterLabelCss)
 
     # trigger initial strength update
     @onKeyup()
