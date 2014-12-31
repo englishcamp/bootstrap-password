@@ -165,12 +165,14 @@ var PasswordInput,
 PasswordInput = (function() {
   function PasswordInput(element, options) {
     this.options = options;
+    this.findBaseZindex = __bind(this.findBaseZindex, this);
     this.defaultCalculation = __bind(this.defaultCalculation, this);
     this.calculateStrength = __bind(this.calculateStrength, this);
     this.updateUI = __bind(this.updateUI, this);
     this.onKeyup = __bind(this.onKeyup, this);
     this.onToggleVisibility = __bind(this.onToggleVisibility, this);
-    this.onResize = __bind(this.onResize, this);
+    this.setBackgroundMeterPosition = __bind(this.setBackgroundMeterPosition, this);
+    this.hideBackgroundMeter = __bind(this.hideBackgroundMeter, this);
     this.layoutMeter = __bind(this.layoutMeter, this);
     this.attachToToggleVisibilityIcon = __bind(this.attachToToggleVisibilityIcon, this);
     this.attachToToggleVisibilityText = __bind(this.attachToToggleVisibilityText, this);
@@ -189,11 +191,15 @@ PasswordInput = (function() {
     this.layoutMeter();
     this.layoutToggleVisibilityLink();
     this.onKeyup();
-    this.onResize();
-    $(window).resize(this.onResize);
+    this.setBackgroundMeterPosition();
+    $(window).resize(this.setBackgroundMeterPosition);
     this.element.keyup(this.onKeyup);
     this.attachToToggleVisibilityIcon();
     this.attachToToggleVisibilityText();
+    this.modal = this.element.closest('.modal');
+    if (this.modal.length === 0) {
+      this.modal = null;
+    }
   }
 
   PasswordInput.prototype.layoutToggleVisibilityLink = function() {
@@ -270,11 +276,19 @@ PasswordInput = (function() {
     return meterGroupElement.append(this.meterElement);
   };
 
-  PasswordInput.prototype.onResize = function() {
+  PasswordInput.prototype.hideBackgroundMeter = function() {
+    if (this.backgroundMeterElement == null) {
+      return;
+    }
+    return this.meterElement.addClass('hidden');
+  };
+
+  PasswordInput.prototype.setBackgroundMeterPosition = function() {
     var backgroundMeterCss;
     if (this.backgroundMeterElement == null) {
       return;
     }
+    console.debug("background-meter z-index: " + (this.baseZindex + 1));
     backgroundMeterCss = {
       position: 'absolute',
       verticalAlign: this.element.css('verticalAlign'),
@@ -357,6 +371,22 @@ PasswordInput = (function() {
     } else {
       return 'veryWeak';
     }
+  };
+
+  PasswordInput.prototype.findBaseZindex = function() {
+    var ancestor, itemZIndex, parentsZindex, zIndex, _i, _len, _ref;
+    parentsZindex = [];
+    _ref = this.element.parents();
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      ancestor = _ref[_i];
+      ancestor = $(ancestor);
+      itemZIndex = ancestor.css('z-index');
+      if (itemZIndex !== "auto" && itemZIndex !== 0) {
+        parentsZindex.push(parseInt(itemZIndex));
+      }
+    }
+    zIndex = Math.max.apply(Math, parentsZindex) + 10;
+    return zIndex;
   };
 
   return PasswordInput;
