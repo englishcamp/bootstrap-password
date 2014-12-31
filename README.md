@@ -21,7 +21,7 @@ Available direct from github as a bower package.
 ## Distribution files
 All distributions are in the `public` directory.  Necessary files are:
 * `js/bootstrap-password.js`
-* `css/bootstrap-password.css` (or the `scss` files)
+* `css/bootstrap-password.css` (or the `scss` files in `app/lib`)
 
 ## Code
 * Structure a standard bootstrap password field with a surrounding `form-group`

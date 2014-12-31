@@ -95,16 +95,16 @@ copyAll = (config, skipRm = false) ->
   )
 
 task 'build:assets-hack', ->
-  invoke 'build:assets-scss'
+#  invoke 'build:assets-scss'
   # (hack) see https://github.com/brunch/brunch/issues/633
   invoke 'build:assets-bootstrap-fonts'
 
-task 'build:assets-scss', 'copy the scss files to make them optionally available', ->
-  log "Running build:assets-scss", green
-
-  config =
-    src: 'app/lib/**/*.scss',
-    dest: 'public/scss'
+#task 'build:assets-scss', 'copy the scss files to make them optionally available', ->
+#  log "Running build:assets-scss", green
+#
+#  config =
+#    src: 'app/lib/**/*.scss',
+#    dest: 'public/scss'
 
   copyAll(config)
 
