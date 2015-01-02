@@ -165,7 +165,6 @@ var PasswordInput,
 PasswordInput = (function() {
   function PasswordInput(element, options) {
     this.options = options;
-    this.findBaseZindex = __bind(this.findBaseZindex, this);
     this.defaultCalculation = __bind(this.defaultCalculation, this);
     this.calculateStrength = __bind(this.calculateStrength, this);
     this.updateUI = __bind(this.updateUI, this);
@@ -283,8 +282,9 @@ PasswordInput = (function() {
 
   PasswordInput.prototype.hideBackgroundMeter = function() {
     if (this.backgroundMeterElement == null) {
-
+      return;
     }
+    return this.meterElement.addClass('hidden');
   };
 
   PasswordInput.prototype.setBackgroundMeterPosition = function() {
@@ -301,7 +301,8 @@ PasswordInput = (function() {
       borderRadius: this.element.css('borderRadius')
     };
     this.backgroundMeterElement.css(backgroundMeterCss);
-    return this.backgroundMeterElement.offset(this.element.offset());
+    this.backgroundMeterElement.offset(this.element.offset());
+    return this.meterElement.removeClass('hidden');
   };
 
   PasswordInput.prototype.onToggleVisibility = function(ev) {
@@ -374,22 +375,6 @@ PasswordInput = (function() {
     } else {
       return 'veryWeak';
     }
-  };
-
-  PasswordInput.prototype.findBaseZindex = function() {
-    var ancestor, itemZIndex, parentsZindex, zIndex, _i, _len, _ref;
-    parentsZindex = [];
-    _ref = this.element.parents();
-    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-      ancestor = _ref[_i];
-      ancestor = $(ancestor);
-      itemZIndex = ancestor.css('z-index');
-      if (itemZIndex !== "auto" && itemZIndex !== 0) {
-        parentsZindex.push(parseInt(itemZIndex));
-      }
-    }
-    zIndex = Math.max.apply(Math, parentsZindex) + 10;
-    return zIndex || 0;
   };
 
   return PasswordInput;

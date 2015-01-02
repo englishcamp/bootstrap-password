@@ -5,12 +5,8 @@ class PasswordInput
     @id = @element.attr('id')
     @isShown = false
     @i18n = @options[@options.lang]
-#    @baseZindex = @findBaseZindex()
-#    @element.css('z-index', @baseZindex + 2)
-
     @formGroupElement = @element.parents('.form-group')
     $.error("Form input ##{@id} must have a surrounding form-group.") unless @formGroupElement.length > 0
-
     @formGroupElement.addClass('bootstrap-password')
 
     # layout based on the feature options
@@ -30,11 +26,9 @@ class PasswordInput
     @attachToToggleVisibilityIcon()
     @attachToToggleVisibilityText()
 
-
     # see if we belong to a modal
     @modal = @element.closest('.modal')
     @modal = null if @modal.length is 0 # for easy comparison
-
 
     # hookup modal listeners to properly position the underlay
     if @modal
@@ -119,22 +113,7 @@ class PasswordInput
   hideBackgroundMeter: =>
     # make sure there is no visual artifacting when a modal is hidden then shown again
     return unless @backgroundMeterElement?
-#    @meterElement.addClass('hidden')
-
-#  setBackgroundMeterPosition: =>
-#    # resetBackgroundMeterCss - now that position and everything is calculated, grab the css from the input and add it to our backgroundMeterElement
-#    return unless @backgroundMeterElement?
-#
-#    backgroundMeterCss =
-#      position: 'absolute'
-#      verticalAlign: @element.css('verticalAlign')
-#      width: @element.css('width')
-#      height: @element.css('height')
-#      borderRadius: @element.css('borderRadius')
-#      'z-index': -1
-#
-#    @backgroundMeterElement.css(backgroundMeterCss)
-#    @backgroundMeterElement.offset(@element.offset())
+    @meterElement.addClass('hidden')
 
   setBackgroundMeterPosition: =>
     # resetBackgroundMeterCss - now that position and everything is calculated, grab the css from the input and add it to our backgroundMeterElement
@@ -148,12 +127,10 @@ class PasswordInput
       width: @element.css('width')
       height: @element.css('height')
       borderRadius: @element.css('borderRadius')
-#      'z-index': @baseZindex + 1
-#      'z-index': -1
 
     @backgroundMeterElement.css(backgroundMeterCss)
     @backgroundMeterElement.offset(@element.offset())
-#    @meterElement.removeClass('hidden')
+    @meterElement.removeClass('hidden')
 
   onToggleVisibility: (ev) =>
     ev.preventDefault()
@@ -210,15 +187,5 @@ class PasswordInput
       'weak'
     else
       'veryWeak'
-
-  findBaseZindex: =>
-    parentsZindex = []
-    for ancestor in @element.parents()
-      ancestor = $(ancestor)
-      itemZIndex = ancestor.css('z-index')
-      parentsZindex.push parseInt(itemZIndex)  if itemZIndex isnt "auto" and itemZIndex isnt 0
-
-    zIndex = Math.max.apply(Math, parentsZindex) + 10
-    zIndex or 0
 
 module.exports = PasswordInput
