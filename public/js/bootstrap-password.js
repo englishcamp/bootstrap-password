@@ -200,6 +200,11 @@ PasswordInput = (function() {
     if (this.modal.length === 0) {
       this.modal = null;
     }
+    if (this.modal) {
+      this.hideBackgroundMeter();
+      this.modal.on('shown.bs.modal', this.setBackgroundMeterPosition);
+      this.modal.on('hidden.bs.modal', this.hideBackgroundMeter);
+    }
   }
 
   PasswordInput.prototype.layoutToggleVisibilityLink = function() {
@@ -278,9 +283,8 @@ PasswordInput = (function() {
 
   PasswordInput.prototype.hideBackgroundMeter = function() {
     if (this.backgroundMeterElement == null) {
-      return;
+
     }
-    return this.meterElement.addClass('hidden');
   };
 
   PasswordInput.prototype.setBackgroundMeterPosition = function() {
@@ -288,14 +292,13 @@ PasswordInput = (function() {
     if (this.backgroundMeterElement == null) {
       return;
     }
-    console.debug("background-meter z-index: " + (this.baseZindex + 1));
+    console.debug("background-meter location set to: ", this.element.offset());
     backgroundMeterCss = {
       position: 'absolute',
       verticalAlign: this.element.css('verticalAlign'),
       width: this.element.css('width'),
       height: this.element.css('height'),
-      borderRadius: this.element.css('borderRadius'),
-      'z-index': -1
+      borderRadius: this.element.css('borderRadius')
     };
     this.backgroundMeterElement.css(backgroundMeterCss);
     return this.backgroundMeterElement.offset(this.element.offset());
@@ -386,7 +389,7 @@ PasswordInput = (function() {
       }
     }
     zIndex = Math.max.apply(Math, parentsZindex) + 10;
-    return zIndex;
+    return zIndex || 0;
   };
 
   return PasswordInput;

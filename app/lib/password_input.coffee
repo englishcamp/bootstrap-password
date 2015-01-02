@@ -36,11 +36,11 @@ class PasswordInput
     @modal = null if @modal.length is 0 # for easy comparison
 
 
-  # hookup modal listeners to properly position the underlay
-  #    if @modal
-  #      @hideBackgroundMeter() # initial hide
-  #      @modal.on('shown.bs.modal', @setBackgroundMeterPosition)
-  #      @modal.on('hidden.bs.modal', @hideBackgroundMeter)
+    # hookup modal listeners to properly position the underlay
+    if @modal
+      @hideBackgroundMeter() # initial hide
+      @modal.on('shown.bs.modal', @setBackgroundMeterPosition)
+      @modal.on('hidden.bs.modal', @hideBackgroundMeter)
 
 
   layoutToggleVisibilityLink: =>
@@ -98,6 +98,7 @@ class PasswordInput
       @formGroupElement.addClass('background-metered')
       @backgroundMeterElement = $("<div class='background-meter' />")
       @formGroupElement.append @backgroundMeterElement
+      #@formGroupElement.find('.input-group').append @backgroundMeterElement # doesn't change modal issue
 
       meterGroupElement = @backgroundMeterElement
 
@@ -118,7 +119,7 @@ class PasswordInput
   hideBackgroundMeter: =>
     # make sure there is no visual artifacting when a modal is hidden then shown again
     return unless @backgroundMeterElement?
-    @meterElement.addClass('hidden')
+#    @meterElement.addClass('hidden')
 
 #  setBackgroundMeterPosition: =>
 #    # resetBackgroundMeterCss - now that position and everything is calculated, grab the css from the input and add it to our backgroundMeterElement
@@ -139,7 +140,8 @@ class PasswordInput
     # resetBackgroundMeterCss - now that position and everything is calculated, grab the css from the input and add it to our backgroundMeterElement
     return unless @backgroundMeterElement?
 
-    console.debug "background-meter z-index: #{@baseZindex + 1}"
+#    console.debug "background-meter z-index: #{@baseZindex + 1}"
+    console.debug "background-meter location set to: ", @element.offset()
     backgroundMeterCss =
       position: 'absolute'
       verticalAlign: @element.css('verticalAlign')
@@ -147,7 +149,7 @@ class PasswordInput
       height: @element.css('height')
       borderRadius: @element.css('borderRadius')
 #      'z-index': @baseZindex + 1
-      'z-index': -1
+#      'z-index': -1
 
     @backgroundMeterElement.css(backgroundMeterCss)
     @backgroundMeterElement.offset(@element.offset())
@@ -217,6 +219,6 @@ class PasswordInput
       parentsZindex.push parseInt(itemZIndex)  if itemZIndex isnt "auto" and itemZIndex isnt 0
 
     zIndex = Math.max.apply(Math, parentsZindex) + 10
-    zIndex
+    zIndex or 0
 
 module.exports = PasswordInput
