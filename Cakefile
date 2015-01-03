@@ -105,8 +105,8 @@ task 'build:assets-hack', ->
 #  config =
 #    src: 'app/lib/**/*.scss',
 #    dest: 'public/scss'
-
-  copyAll(config)
+#
+#  copyAll(config)
 
 task 'build:assets-bootstrap-fonts', 'copy the bootstrap fonts in the expected public location (hack) see https://github.com/brunch/brunch/issues/633', ->
   log "Running build:assets-bootstrap-fonts...", green
