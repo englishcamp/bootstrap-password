@@ -170,7 +170,8 @@ PasswordInput = (function() {
     this.updateUI = __bind(this.updateUI, this);
     this.onKeyup = __bind(this.onKeyup, this);
     this.onToggleVisibility = __bind(this.onToggleVisibility, this);
-    this.onResize = __bind(this.onResize, this);
+    this.setBackgroundMeterPosition = __bind(this.setBackgroundMeterPosition, this);
+    this.hideBackgroundMeter = __bind(this.hideBackgroundMeter, this);
     this.layoutMeter = __bind(this.layoutMeter, this);
     this.attachToToggleVisibilityIcon = __bind(this.attachToToggleVisibilityIcon, this);
     this.attachToToggleVisibilityText = __bind(this.attachToToggleVisibilityText, this);
@@ -189,11 +190,20 @@ PasswordInput = (function() {
     this.layoutMeter();
     this.layoutToggleVisibilityLink();
     this.onKeyup();
-    this.onResize();
-    $(window).resize(this.onResize);
+    this.setBackgroundMeterPosition();
+    $(window).resize(this.setBackgroundMeterPosition);
     this.element.keyup(this.onKeyup);
     this.attachToToggleVisibilityIcon();
     this.attachToToggleVisibilityText();
+    this.modal = this.element.closest('.modal');
+    if (this.modal.length === 0) {
+      this.modal = null;
+    }
+    if (this.modal) {
+      this.hideBackgroundMeter();
+      this.modal.on('shown.bs.modal', this.setBackgroundMeterPosition);
+      this.modal.on('hidden.bs.modal', this.hideBackgroundMeter);
+    }
   }
 
   PasswordInput.prototype.layoutToggleVisibilityLink = function() {
@@ -270,21 +280,29 @@ PasswordInput = (function() {
     return meterGroupElement.append(this.meterElement);
   };
 
-  PasswordInput.prototype.onResize = function() {
+  PasswordInput.prototype.hideBackgroundMeter = function() {
+    if (this.backgroundMeterElement == null) {
+      return;
+    }
+    return this.meterElement.addClass('hidden');
+  };
+
+  PasswordInput.prototype.setBackgroundMeterPosition = function() {
     var backgroundMeterCss;
     if (this.backgroundMeterElement == null) {
       return;
     }
+    console.debug("background-meter location set to: ", this.element.offset());
     backgroundMeterCss = {
       position: 'absolute',
       verticalAlign: this.element.css('verticalAlign'),
       width: this.element.css('width'),
       height: this.element.css('height'),
-      borderRadius: this.element.css('borderRadius'),
-      'z-index': -1
+      borderRadius: this.element.css('borderRadius')
     };
     this.backgroundMeterElement.css(backgroundMeterCss);
-    return this.backgroundMeterElement.offset(this.element.offset());
+    this.backgroundMeterElement.offset(this.element.offset());
+    return this.meterElement.removeClass('hidden');
   };
 
   PasswordInput.prototype.onToggleVisibility = function(ev) {
